@@ -15,11 +15,23 @@ public class OrderItemRepositoryImpl implements OrderItemRepository {
     @Autowired
     private EntityManager entityManager;
 
+    /**
+     * Get an site manager created order item by its identification
+     *
+     * @param id - Order item identification
+     * @return OrderItem
+     */
     @Override
     public OrderItem getOrderItemById(Long id) {
         return entityManager.find(OrderItem.class, id);
     }
 
+    /**
+     * Get all supervisor approved order items by supplier id
+     *
+     * @param supplierId - Supplier identification
+     * @return List<OrderItem>
+     */
     @Override
     public List<OrderItem> getAllCustomerApprovedPurchaseRequisitions(long supplierId) {
         TypedQuery<OrderItem> query = entityManager

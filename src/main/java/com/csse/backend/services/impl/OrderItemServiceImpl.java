@@ -23,6 +23,12 @@ public class OrderItemServiceImpl implements OrderItemService {
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Get all supervisor approved purchase requisitions
+     *
+     * @param supplierId - Supplier identification
+     * @return List<OrderItem></OrderItem>
+     */
     @Override
     public List<OrderItem> getAllCustomerApprovedPurchaseRequisitions(long supplierId) {
         try {

@@ -13,6 +13,12 @@ public class UserRepositoryImpl implements UserRepository {
     @Autowired
     EntityManager entityManager;
 
+    /**
+     * Get a user by its identification
+     *
+     * @param id - User identification
+     * @return User
+     */
     @Override
     public User getUserById(Long id) {
         return entityManager.find(User.class, id);
