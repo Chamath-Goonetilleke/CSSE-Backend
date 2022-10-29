@@ -176,6 +176,7 @@ public class SupplierOrderQuotationServiceImpl implements SupplierOrderQuotation
 
             if (supplierOrderQuotation != null) {
                 supplierOrderQuotation.setSupplierOrderQuotationStatus(SupplierOrderQuotationStatus.PLACED);
+                supplierOrderQuotationRepository.saveSupplierOrderQuotation(supplierOrderQuotation);
                 return true;
             } else {
                 return false;
