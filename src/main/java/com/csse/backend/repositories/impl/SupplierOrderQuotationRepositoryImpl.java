@@ -52,7 +52,7 @@ public class SupplierOrderQuotationRepositoryImpl implements SupplierOrderQuotat
     @Override
     public List<SupplierOrderQuotation> getAllCustomerApprovalPendingSoq(long employeeUserId) {
         TypedQuery<SupplierOrderQuotation> query = entityManager
-                .createQuery("SELECT s, s.orderItem FROM SupplierOrderQuotation s WHERE s.orderItem.createdBy.id = :employeeUserId AND s.supplierOrderQuotationStatus = 0", SupplierOrderQuotation.class);
+                .createQuery("SELECT s FROM SupplierOrderQuotation s WHERE s.orderItem.createdBy.id = :employeeUserId AND s.supplierOrderQuotationStatus = 0", SupplierOrderQuotation.class);
         query.setParameter("employeeUserId", employeeUserId);
         return query.getResultList();
     }
