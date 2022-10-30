@@ -3,6 +3,7 @@ package com.csse.backend.repositories.impl;
 import com.csse.backend.domains.OrderItem;
 import com.csse.backend.repositories.OrderItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -16,7 +17,7 @@ public class OrderItemRepositoryImpl implements OrderItemRepository {
     private EntityManager entityManager;
 
     /**
-     * Get an site manager created order item by its identification
+     * Get a site manager created order item by its identification
      *
      * @param id - Order item identification
      * @return OrderItem
@@ -33,9 +34,10 @@ public class OrderItemRepositoryImpl implements OrderItemRepository {
      * @return List<OrderItem>
      */
     @Override
+    @Query
     public List<OrderItem> getAllCustomerApprovedPurchaseRequisitions(long supplierId) {
         TypedQuery<OrderItem> query = entityManager
-                .createQuery("SELECT o FROM OrderItem o, o.suppliers s WHERE s.id = :supplierId AND o.orderStatus = 1", OrderItem.class);
+                .createQuery("SELECT o FROM OrderItem o JOIN FETCH o.suppliers s WHERE s.id = :supplierId AND o.orderStatus = 1", OrderItem.class);
         query.setParameter("supplierId", supplierId);
         return query.getResultList();
     }
