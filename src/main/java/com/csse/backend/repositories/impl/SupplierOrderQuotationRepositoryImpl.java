@@ -16,11 +16,23 @@ public class SupplierOrderQuotationRepositoryImpl implements SupplierOrderQuotat
     @Autowired
     EntityManager entityManager;
 
+    /**
+     * Get a supplier order quotation by its identification
+     *
+     * @param supplierOrderQuotationId - Supplier order quotation identification
+     * @return SupplierOrderQuotation
+     */
     @Override
     public SupplierOrderQuotation getSupplierQuotationById(long supplierOrderQuotationId) {
         return entityManager.find(SupplierOrderQuotation.class, supplierOrderQuotationId);
     }
 
+    /**
+     * Create a supplier order quotation
+     *
+     * @param supplierOrderQuotation - New Supplier order quotation
+     * @return SupplierOrderQuotation
+     */
     @Override
     @Transactional
     public SupplierOrderQuotation saveSupplierOrderQuotation(SupplierOrderQuotation supplierOrderQuotation) {
@@ -33,6 +45,12 @@ public class SupplierOrderQuotationRepositoryImpl implements SupplierOrderQuotat
         return supplierOrderQuotation;
     }
 
+    /**
+     * Get all ready to deliver items
+     *
+     * @param supplierId - Supplier identification
+     * @return List<SupplierOrderQuotation>
+     */
     @Override
     public List<SupplierOrderQuotation> getAllCustomerAndSupplierAcceptedPurchaseRequisitions(long supplierId) {
         TypedQuery<SupplierOrderQuotation> query = entityManager
@@ -41,6 +59,12 @@ public class SupplierOrderQuotationRepositoryImpl implements SupplierOrderQuotat
         return query.getResultList();
     }
 
+    /**
+     * Get all supervisor accepted supplier order quotations
+     *
+     * @param supplierId - Supplier identification
+     * @return List<SupplierOrderQuotation>
+     */
     @Override
     public List<SupplierOrderQuotation> getAllCustomerAcceptedPurchaseRequisitions(long supplierId) {
         TypedQuery<SupplierOrderQuotation> query = entityManager
@@ -49,6 +73,12 @@ public class SupplierOrderQuotationRepositoryImpl implements SupplierOrderQuotat
         return query.getResultList();
     }
 
+    /**
+     * Get all supervisor approval pending supplier order quotations
+     *
+     * @param employeeUserId - Supervisor identification
+     * @return List<SupplierOrderQuotation>t
+     */
     @Override
     public List<SupplierOrderQuotation> getAllCustomerApprovalPendingSoq(long employeeUserId) {
         TypedQuery<SupplierOrderQuotation> query = entityManager

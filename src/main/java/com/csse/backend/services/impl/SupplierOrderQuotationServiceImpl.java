@@ -35,6 +35,12 @@ public class SupplierOrderQuotationServiceImpl implements SupplierOrderQuotation
     @Autowired
     OrderItemRepository orderItemRepository;
 
+    /**
+     * Create a supplier order quotation
+     *
+     * @param supplierAcceptPrDto - New Supplier order quotation
+     * @return true if new Supplier order quotation created successfully, else false
+     */
     @Override
     public boolean acceptCustomerApprovedPurchaseRequisition(SupplierAcceptPrDto supplierAcceptPrDto) {
 
@@ -101,6 +107,12 @@ public class SupplierOrderQuotationServiceImpl implements SupplierOrderQuotation
         }
     }
 
+    /**
+     * Get all ready to deliver items
+     *
+     * @param supplierId - Supplier identification
+     * @return List<SupplierOrderQuotation>
+     */
     @Override
     public List<SupplierOrderQuotation> getAllCustomerAndSupplierAcceptedPurchaseRequisitions(long supplierId) {
         User user = userRepository.getUserById(supplierId);
@@ -117,6 +129,13 @@ public class SupplierOrderQuotationServiceImpl implements SupplierOrderQuotation
         }
     }
 
+    /**
+     * Update an advice note notice for an existing supplier order quotation
+     *
+     * @param supplierOrderQuotationId - Supplier oder quotation identification
+     * @param link                     - Advice note document upload cloud storage link
+     * @return
+     */
     @Override
     public boolean updateAdviceNote(long supplierOrderQuotationId, String link) {
         SupplierOrderQuotation supplierOrderQuotation = supplierOrderQuotationRepository.getSupplierQuotationById(supplierOrderQuotationId);
@@ -135,6 +154,13 @@ public class SupplierOrderQuotationServiceImpl implements SupplierOrderQuotation
         }
     }
 
+    /**
+     * Update an invoice notice for an existing supplier order quotation
+     *
+     * @param supplierOrderQuotationId - Supplier oder quotation identification
+     * @param link                     - Invoice document upload cloud storage link
+     * @return
+     */
     @Override
     public boolean updateInvoice(long supplierOrderQuotationId, String link) {
         SupplierOrderQuotation supplierOrderQuotation = supplierOrderQuotationRepository.getSupplierQuotationById(supplierOrderQuotationId);
@@ -153,6 +179,12 @@ public class SupplierOrderQuotationServiceImpl implements SupplierOrderQuotation
         }
     }
 
+    /**
+     * Get all supervisor accepted supplier order quotations
+     *
+     * @param supplierId - Supplier identification
+     * @return List<SupplierOrderQuotation>
+     */
     @Override
     public List<SupplierOrderQuotation> getAllCustomerAcceptedPurchaseRequisitions(long supplierId) {
         try {
@@ -169,6 +201,12 @@ public class SupplierOrderQuotationServiceImpl implements SupplierOrderQuotation
         }
     }
 
+    /**
+     * Accept a supervisor accepted supplier order quotation by relevant supplier
+     *
+     * @param supplierOrderQuotationId - Supplier order quotation identification
+     * @return true if update successful, else false
+     */
     @Override
     public boolean acceptCustomerAcceptedOrderQuotation(long supplierOrderQuotationId) {
         try {
@@ -187,6 +225,12 @@ public class SupplierOrderQuotationServiceImpl implements SupplierOrderQuotation
         }
     }
 
+    /**
+     * Get all supervisor approval pending supplier order quotations
+     *
+     * @param employeeUserId - Supervisor identification
+     * @return List<SupplierOrderQuotation>t
+     */
     @Override
     public List<SupplierOrderQuotation> getAllCustomerApprovalPendingSoq(long employeeUserId) {
         try {
@@ -203,6 +247,13 @@ public class SupplierOrderQuotationServiceImpl implements SupplierOrderQuotation
         }
     }
 
+    /**
+     * Approve ar reject supplier order quotation by supervisor
+     *
+     * @param command - If command inside AcceptOrRejectPendingPr object is true will accept supplier order quotation,
+     *                else will it with reason
+     * @return true if update successful, else false
+     */
     @Override
     public boolean acceptOrRejectCustomerApprovalPendingSoq(AcceptOrRejectPendingPr command) {
         try {
