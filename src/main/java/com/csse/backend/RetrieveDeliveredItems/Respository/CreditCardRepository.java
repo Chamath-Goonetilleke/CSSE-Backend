@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CreditCardRepository {
 
-    void addCard(CreditCard creditCard);
+    CreditCard addCard(CreditCard creditCard);
 
     List<CreditCard> getAllCards(Long userId);
 

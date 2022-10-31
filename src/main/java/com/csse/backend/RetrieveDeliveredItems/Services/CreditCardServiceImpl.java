@@ -1,8 +1,11 @@
 package com.csse.backend.RetrieveDeliveredItems.Services;
 
 import com.csse.backend.RetrieveDeliveredItems.DTO.CreditCardDTO;
+import com.csse.backend.RetrieveDeliveredItems.DTO.PaymentDTO;
 import com.csse.backend.RetrieveDeliveredItems.Entity.CreditCard;
+import com.csse.backend.RetrieveDeliveredItems.Entity.Payment;
 import com.csse.backend.RetrieveDeliveredItems.Respository.CreditCardRepository;
+import com.csse.backend.RetrieveDeliveredItems.Respository.PaymentRepository;
 import com.csse.backend.RetrieveDeliveredItems.Services.Abstract.CreditCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,13 +17,15 @@ import java.util.List;
 public class CreditCardServiceImpl implements CreditCardService {
 
     final CreditCardRepository creditCardRepository;
+    final PaymentRepository paymentRepository;
 
-    public CreditCardServiceImpl(CreditCardRepository creditCardRepository) {
+    public CreditCardServiceImpl(CreditCardRepository creditCardRepository, PaymentRepository paymentRepository) {
         this.creditCardRepository = creditCardRepository;
+        this.paymentRepository = paymentRepository;
     }
 
     @Override
-    public boolean addCard(CreditCardDTO creditCardDTO) {
+    public long addCard(CreditCardDTO creditCardDTO) {
 
         try {
             CreditCard creditCard = new CreditCard();
@@ -30,10 +35,10 @@ public class CreditCardServiceImpl implements CreditCardService {
             creditCard.setExpiryDate(creditCardDTO.getExpiryDate());
             creditCard.setCvc(creditCardDTO.getCvc());
 
-            creditCardRepository.addCard(creditCard);
-            return true;
+            CreditCard card = creditCardRepository.addCard(creditCard);
+            return card.getId();
         } catch (Exception e) {
-            return false;
+            return 0;
         }
     }
 
@@ -41,7 +46,7 @@ public class CreditCardServiceImpl implements CreditCardService {
     public List<CreditCard> getAllCards(Long userId) {
         try {
             return creditCardRepository.getAllCards(userId);
-        }catch (Exception e) {
+        } catch (Exception e) {
             return Collections.emptyList();
         }
     }
@@ -50,8 +55,25 @@ public class CreditCardServiceImpl implements CreditCardService {
     public CreditCard getCardById(Long id) {
         try {
             return creditCardRepository.getCardById(id);
-        }catch (Exception e){
+        } catch (Exception e) {
             return null;
+        }
+    }
+
+    @Override
+    public boolean savePayment(PaymentDTO paymentDTO) {
+        try {
+            Payment payment = new Payment();
+            payment.setUserId(paymentDTO.getUserId());
+            payment.setReferenceNumber(paymentDTO.getReferenceNumber());
+            payment.setTotalAmount(paymentDTO.getTotalAmount());
+            payment.setCardId(paymentDTO.getCardId());
+
+            paymentRepository.savePayment(payment);
+
+            return true;
+        }catch (Exception e){
+            return false;
         }
     }
 }

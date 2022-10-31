@@ -20,8 +20,9 @@ public class CreditCardRepositoryImpl implements CreditCardRepository {
 
     @Override
     @Transactional
-    public void addCard(CreditCard creditCard) {
+    public CreditCard addCard(CreditCard creditCard) {
         entityManager.persist(creditCard);
+        return creditCard;
 
     }
 

@@ -20,41 +20,45 @@ public class DeliveredItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "supplier_order_quotation_id")
+    @Column(name = "SUPPLIER_ORDER_QUOTATION_ID")
     private Long id;
 
-    @Column(name = "user_id")
-    private Long supplier;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "USER_ID", nullable = false)
+    @JsonIgnore
+    private User supplier;
 
-    @Column(name = "order_item_id")
-    private Long orderItem;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "ORDER_ITEM_ID", nullable = false)
+    private OrderItem orderItem;
 
-    @Column(name = "supply_amount")
+    @Column(name = "SUPPLY_AMOUNT")
     private String supplyAmount;
 
-    @Column(name = "supply_price_per_unit")
+    @Column(name = "SUPPLY_PRICE_PER_UNIT")
     private Float supplyPricePerUnit;
 
-    @Column(name = "supply_brand")
+    @Column(name = "SUPPLY_BRAND")
     private String supplyBrand;
 
-    @Column(name = "supply_date")
+    @Column(name = "SUPPLY_DATE")
     private Date supplyDate;
 
-    @Column(name = "order_rejected_date")
+    @Column(name = "ORDER_REJECTED_DATE")
     private Date orderRejectedDate;
 
-    @Column(name = "order_rejected_reason")
+    @Column(name = "ORDER_REJECTED_REASON")
     private String orderRejectedReason;
 
-    @Column(name = "advice_note")
+    @Column(name = "ADVICE_NOTE")
     private String adviceNote;
 
-    @Column(name = "invoice")
+    @Column(name = "INVOICE")
     private String invoice;
 
-    @Column(name = "supplier_order_quotation_status")
+    @Column(name = "SUPPLIER_ORDER_QUOTATION_STATUS")
     @Enumerated(EnumType.ORDINAL)
     private SupplierOrderQuotationStatus supplierOrderQuotationStatus;
+
 
 }

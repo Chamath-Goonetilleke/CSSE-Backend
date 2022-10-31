@@ -1,6 +1,7 @@
 package com.csse.backend.RetrieveDeliveredItems.Controller;
 
 import com.csse.backend.RetrieveDeliveredItems.DTO.CreditCardDTO;
+import com.csse.backend.RetrieveDeliveredItems.DTO.PaymentDTO;
 import com.csse.backend.RetrieveDeliveredItems.Entity.CreditCard;
 import com.csse.backend.RetrieveDeliveredItems.Services.Abstract.CreditCardService;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/v1/payment")
 public class CreditCardController {
 
     final CreditCardService creditCardService;
@@ -20,9 +22,9 @@ public class CreditCardController {
 
     @PostMapping("/addCard")
     public ResponseEntity<?> addCard(@RequestBody CreditCardDTO creditCardDTO){
-        boolean status = creditCardService.addCard(creditCardDTO);
-        if(status){
-            return new ResponseEntity<>("Card Saved Successfully", HttpStatus.OK);
+        long id = creditCardService.addCard(creditCardDTO);
+        if(id !=0){
+            return new ResponseEntity<>(id, HttpStatus.OK);
         }
         return new ResponseEntity<>("Something went wrong", HttpStatus.BAD_REQUEST);
 
@@ -45,6 +47,15 @@ public class CreditCardController {
             return new ResponseEntity<>("Can't find the card", HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(creditCard, HttpStatus.OK);
+    }
+
+    @PostMapping("/savePayment")
+    public ResponseEntity<?> savePayment(@RequestBody PaymentDTO paymentDTO){
+        boolean status = creditCardService.savePayment(paymentDTO);
+        if(status){
+            return new ResponseEntity<>("Saved", HttpStatus.OK);
+        }
+        return new ResponseEntity<>("Something went wrong", HttpStatus.BAD_REQUEST);
     }
 
 }
