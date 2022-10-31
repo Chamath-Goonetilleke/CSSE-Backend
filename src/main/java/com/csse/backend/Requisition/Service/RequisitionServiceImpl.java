@@ -26,7 +26,8 @@ public class RequisitionServiceImpl implements RequisitionService{
     public ResponseEntity<?> insertNewRequisition(OrderDto orderDto) {
 
         try{
-            Order order = new Order(orderDto.getDeliveryAddress(),
+            Order order = new Order(
+                    orderDto.getDeliveryAddress(),
                     orderDto.getItemName(),
                     orderDto.getDeliveryDate(),
                     orderDto.getQuantity(),
@@ -51,7 +52,7 @@ public class RequisitionServiceImpl implements RequisitionService{
     public ResponseEntity<?> getPendingOrdersByName(String name) {
 
         try{
-            List<Order> orderResult = requisitionRepository.getPrivileges(name);
+            List<Order> orderResult = requisitionRepository.getPendingRequisitions(name);
             LOGGER.info("Successfully get Requisition in Pending");
             return ResponseEntity.status(HttpStatus.OK).body(orderResult);
         }catch(Exception e){
@@ -60,5 +61,18 @@ public class RequisitionServiceImpl implements RequisitionService{
 
         }
 
+    }
+
+    @Override
+    public ResponseEntity<?> getApprovedOrdersByName(String name) {
+        try{
+            List<Order> orderResult = requisitionRepository.getApprovedRequisitions(name);
+            LOGGER.info("Successfully get Requisition in Approved");
+            return ResponseEntity.status(HttpStatus.OK).body(orderResult);
+        }catch(Exception e){
+            LOGGER.info("Cannot get Requisition in Approved"+e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Cannot get Requisition in Approved");
+
+        }
     }
 }

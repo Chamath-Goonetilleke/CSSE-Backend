@@ -25,4 +25,8 @@ public class RequisitionController {
         return requisitionService.getPendingOrdersByName(name);
 
     }
+    @GetMapping("/get-approved-requisitions/{name}")
+    public ResponseEntity<?> getApprovedRequisition(@PathVariable String name){
+        return requisitionService.getApprovedOrdersByName(name);
+    }
 }

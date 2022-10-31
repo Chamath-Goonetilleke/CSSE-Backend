@@ -14,5 +14,9 @@ public interface RequisitionRepository  extends CrudRepository<Order, Integer> {
 
     @Modifying
     @Query(value = "SELECT * FROM orders s WHERE s.site_manager_name = ?1 AND status = 'Pending';", nativeQuery = true)
-    List<Order> getPrivileges(String name);
+    List<Order> getPendingRequisitions(String name);
+
+    @Modifying
+    @Query(value = "SELECT * FROM orders s WHERE s.site_manager_name = ?1 AND status = 'Approved';", nativeQuery = true)
+    List<Order> getApprovedRequisitions(String name);
 }

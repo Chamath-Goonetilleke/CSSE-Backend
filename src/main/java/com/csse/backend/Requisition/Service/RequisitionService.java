@@ -8,4 +8,5 @@ public interface RequisitionService {
     ResponseEntity<?> insertNewRequisition(OrderDto orderDto);
 
     ResponseEntity<?> getPendingOrdersByName(String name);
+    ResponseEntity<?> getApprovedOrdersByName(String name);
 }
