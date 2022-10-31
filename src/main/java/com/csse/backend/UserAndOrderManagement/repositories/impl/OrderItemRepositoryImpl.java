@@ -1,7 +1,7 @@
-package com.csse.backend.repositories.impl;
+package com.csse.backend.UserAndOrderManagement.repositories.impl;
 
-import com.csse.backend.domains.OrderItem;
-import com.csse.backend.repositories.OrderItemRepository;
+import com.csse.backend.UserAndOrderManagement.domains.OrderItem;
+import com.csse.backend.UserAndOrderManagement.repositories.OrderItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

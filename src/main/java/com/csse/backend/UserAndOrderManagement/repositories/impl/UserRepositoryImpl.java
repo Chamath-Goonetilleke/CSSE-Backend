@@ -1,7 +1,7 @@
-package com.csse.backend.repositories.impl;
+package com.csse.backend.UserAndOrderManagement.repositories.impl;
 
-import com.csse.backend.domains.User;
-import com.csse.backend.repositories.UserRepository;
+import com.csse.backend.UserAndOrderManagement.domains.User;
+import com.csse.backend.UserAndOrderManagement.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

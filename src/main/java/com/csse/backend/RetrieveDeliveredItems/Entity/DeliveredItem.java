@@ -1,8 +1,8 @@
 package com.csse.backend.RetrieveDeliveredItems.Entity;
 
-import com.csse.backend.domains.OrderItem;
-import com.csse.backend.domains.User;
-import com.csse.backend.enums.SupplierOrderQuotationStatus;
+import com.csse.backend.UserAndOrderManagement.domains.OrderItem;
+import com.csse.backend.UserAndOrderManagement.domains.User;
+import com.csse.backend.UserAndOrderManagement.enums.SupplierOrderQuotationStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;

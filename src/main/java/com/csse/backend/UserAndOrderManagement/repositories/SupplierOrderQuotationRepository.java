@@ -1,6 +1,6 @@
-package com.csse.backend.repositories;
+package com.csse.backend.UserAndOrderManagement.repositories;
 
-import com.csse.backend.domains.SupplierOrderQuotation;
+import com.csse.backend.UserAndOrderManagement.domains.SupplierOrderQuotation;
 
 import java.util.List;
 

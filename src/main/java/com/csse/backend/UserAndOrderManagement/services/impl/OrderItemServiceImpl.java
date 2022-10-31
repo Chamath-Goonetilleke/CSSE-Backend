@@ -1,10 +1,10 @@
-package com.csse.backend.services.impl;
+package com.csse.backend.UserAndOrderManagement.services.impl;
 
-import com.csse.backend.domains.OrderItem;
-import com.csse.backend.domains.User;
-import com.csse.backend.repositories.OrderItemRepository;
-import com.csse.backend.repositories.UserRepository;
-import com.csse.backend.services.OrderItemService;
+import com.csse.backend.UserAndOrderManagement.domains.OrderItem;
+import com.csse.backend.UserAndOrderManagement.domains.User;
+import com.csse.backend.UserAndOrderManagement.repositories.OrderItemRepository;
+import com.csse.backend.UserAndOrderManagement.repositories.UserRepository;
+import com.csse.backend.UserAndOrderManagement.services.OrderItemService;
 
 import lombok.extern.slf4j.Slf4j;
 

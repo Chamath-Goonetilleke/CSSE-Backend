@@ -1,9 +1,9 @@
-package com.csse.backend.controllers;
+package com.csse.backend.UserAndOrderManagement.controllers;
 
-import com.csse.backend.domains.SupplierOrderQuotation;
-import com.csse.backend.dtos.AcceptOrRejectPendingPr;
-import com.csse.backend.dtos.SupplierAcceptPrDto;
-import com.csse.backend.services.SupplierOrderQuotationService;
+import com.csse.backend.UserAndOrderManagement.domains.SupplierOrderQuotation;
+import com.csse.backend.UserAndOrderManagement.dtos.AcceptOrRejectPendingPr;
+import com.csse.backend.UserAndOrderManagement.dtos.SupplierAcceptPrDto;
+import com.csse.backend.UserAndOrderManagement.services.SupplierOrderQuotationService;
 
 import lombok.extern.slf4j.Slf4j;
 

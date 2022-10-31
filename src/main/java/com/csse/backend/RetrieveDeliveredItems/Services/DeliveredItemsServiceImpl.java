@@ -5,12 +5,10 @@ import com.csse.backend.RetrieveDeliveredItems.DTO.ReceiptDTO;
 import com.csse.backend.RetrieveDeliveredItems.Entity.DeliveredItem;
 import com.csse.backend.RetrieveDeliveredItems.Respository.DeliveredItemsRepository;
 import com.csse.backend.RetrieveDeliveredItems.Services.Abstract.DeliveredItemsService;
-import com.csse.backend.domains.OrderItem;
-import com.csse.backend.domains.SupplierOrderQuotation;
-import com.csse.backend.domains.User;
-import com.csse.backend.repositories.OrderItemRepository;
-import com.csse.backend.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.csse.backend.UserAndOrderManagement.domains.OrderItem;
+import com.csse.backend.UserAndOrderManagement.domains.SupplierOrderQuotation;
+import com.csse.backend.UserAndOrderManagement.repositories.OrderItemRepository;
+import com.csse.backend.UserAndOrderManagement.repositories.UserRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

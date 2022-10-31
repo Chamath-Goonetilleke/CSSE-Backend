@@ -1,15 +1,15 @@
-package com.csse.backend.services.impl;
+package com.csse.backend.UserAndOrderManagement.services.impl;
 
-import com.csse.backend.domains.OrderItem;
-import com.csse.backend.domains.SupplierOrderQuotation;
-import com.csse.backend.domains.User;
-import com.csse.backend.dtos.AcceptOrRejectPendingPr;
-import com.csse.backend.dtos.SupplierAcceptPrDto;
-import com.csse.backend.enums.SupplierOrderQuotationStatus;
-import com.csse.backend.repositories.OrderItemRepository;
-import com.csse.backend.repositories.SupplierOrderQuotationRepository;
-import com.csse.backend.repositories.UserRepository;
-import com.csse.backend.services.SupplierOrderQuotationService;
+import com.csse.backend.UserAndOrderManagement.domains.OrderItem;
+import com.csse.backend.UserAndOrderManagement.domains.SupplierOrderQuotation;
+import com.csse.backend.UserAndOrderManagement.domains.User;
+import com.csse.backend.UserAndOrderManagement.dtos.AcceptOrRejectPendingPr;
+import com.csse.backend.UserAndOrderManagement.dtos.SupplierAcceptPrDto;
+import com.csse.backend.UserAndOrderManagement.enums.SupplierOrderQuotationStatus;
+import com.csse.backend.UserAndOrderManagement.repositories.OrderItemRepository;
+import com.csse.backend.UserAndOrderManagement.repositories.SupplierOrderQuotationRepository;
+import com.csse.backend.UserAndOrderManagement.repositories.UserRepository;
+import com.csse.backend.UserAndOrderManagement.services.SupplierOrderQuotationService;
 
 import java.util.List;
 

@@ -1,8 +1,7 @@
 package com.csse.backend.RetrieveDeliveredItems.Services.Abstract;
 
 import com.csse.backend.RetrieveDeliveredItems.DTO.DeliveredItemResponseDTO;
-import com.csse.backend.RetrieveDeliveredItems.Entity.DeliveredItem;
-import com.csse.backend.domains.SupplierOrderQuotation;
+import com.csse.backend.UserAndOrderManagement.domains.SupplierOrderQuotation;
 
 import java.util.List;
 

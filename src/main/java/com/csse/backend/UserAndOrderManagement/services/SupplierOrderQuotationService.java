@@ -1,8 +1,8 @@
-package com.csse.backend.services;
+package com.csse.backend.UserAndOrderManagement.services;
 
-import com.csse.backend.domains.SupplierOrderQuotation;
-import com.csse.backend.dtos.AcceptOrRejectPendingPr;
-import com.csse.backend.dtos.SupplierAcceptPrDto;
+import com.csse.backend.UserAndOrderManagement.domains.SupplierOrderQuotation;
+import com.csse.backend.UserAndOrderManagement.dtos.AcceptOrRejectPendingPr;
+import com.csse.backend.UserAndOrderManagement.dtos.SupplierAcceptPrDto;
 
 import java.util.List;
 

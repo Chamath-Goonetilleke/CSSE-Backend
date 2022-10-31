@@ -1,6 +1,6 @@
-package com.csse.backend.domains;
+package com.csse.backend.UserAndOrderManagement.domains;
 
-import com.csse.backend.enums.UserType;
+import com.csse.backend.UserAndOrderManagement.enums.UserType;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

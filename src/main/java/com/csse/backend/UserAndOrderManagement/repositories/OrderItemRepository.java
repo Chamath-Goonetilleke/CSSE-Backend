@@ -1,6 +1,6 @@
-package com.csse.backend.repositories;
+package com.csse.backend.UserAndOrderManagement.repositories;
 
-import com.csse.backend.domains.OrderItem;
+import com.csse.backend.UserAndOrderManagement.domains.OrderItem;
 
 import java.util.List;
 

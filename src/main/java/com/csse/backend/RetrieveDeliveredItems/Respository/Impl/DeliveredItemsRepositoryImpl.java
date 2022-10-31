@@ -3,13 +3,12 @@ package com.csse.backend.RetrieveDeliveredItems.Respository.Impl;
 import com.csse.backend.RetrieveDeliveredItems.Entity.DeliveredItem;
 //import com.csse.backend.RetrieveDeliveredItems.Entity.User;
 import com.csse.backend.RetrieveDeliveredItems.Respository.DeliveredItemsRepository;
-import com.csse.backend.domains.SupplierOrderQuotation;
+import com.csse.backend.UserAndOrderManagement.domains.SupplierOrderQuotation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import java.sql.SQLException;
 import java.util.List;
 
 @Repository

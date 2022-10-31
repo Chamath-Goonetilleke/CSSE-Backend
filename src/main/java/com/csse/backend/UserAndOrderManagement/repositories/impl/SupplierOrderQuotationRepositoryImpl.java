@@ -1,7 +1,7 @@
-package com.csse.backend.repositories.impl;
+package com.csse.backend.UserAndOrderManagement.repositories.impl;
 
-import com.csse.backend.domains.SupplierOrderQuotation;
-import com.csse.backend.repositories.SupplierOrderQuotationRepository;
+import com.csse.backend.UserAndOrderManagement.domains.SupplierOrderQuotation;
+import com.csse.backend.UserAndOrderManagement.repositories.SupplierOrderQuotationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
