@@ -1,4 +1,4 @@
-package com.csse.backend;
+package com.csse.backend.ItemServicesTest.Item;
 
 import com.csse.backend.dtos.SupplierAcceptPrDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -129,7 +129,7 @@ public class ItemServiceTests {
     }
 
     /*
-        Test whether an invoice cannot be updated for a no- existing supplier order quotation
+        Test whether an invoice cannot be updated for a non-existing supplier order quotation
     */
     @Test
     public void updateInvoiceReturnsHttpStatusAUnprocessableEntity() throws Exception {
