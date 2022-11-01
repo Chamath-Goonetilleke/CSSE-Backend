@@ -21,9 +21,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -32,11 +30,11 @@ import javax.persistence.Table;
 @Data
 @Entity
 @Table(name = "ORDER_ITEM")
-public class OrderItem {
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ORDER_ITEM_ID")
+    @Column(name = "ORDER_ID")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -44,29 +42,24 @@ public class OrderItem {
     @JsonIgnore
     private User createdBy;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "ORDER_SUPPLIERS", joinColumns = {@JoinColumn(name = "USER_ID")}, inverseJoinColumns = {@JoinColumn(name = "ORDER_ITEM_ID")})
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<User> suppliers;
+    private List<Item> items;
 
-    @Column(name = "ITEM_NAME")
-    private String itemName;
+    @Column(name = "ORDER_NAME")
+    private String orderName;
 
     @Column(name = "ORDER_REQUIRED_DATE")
     private Date orderRequiredDate;
 
-    @Column(name = "ORDER_REQUIRED_AMOUNT")
-    private String orderRequiredAmount;
+    @Column(name = "REQUIRED_AMOUNT")
+    private String requiredAmount;
 
-    @Column(name = "ORDER_ITEM_DELIVERY_ADDRESS")
-    private String orderItemDeliveryAddress;
+    @Column(name = "DELIVERY_ADDRESS")
+    private String deliveryAddress;
 
     @Column(name = "ORDER_STATUS")
     @Enumerated(EnumType.ORDINAL)
     private OrderStatus orderStatus;
-
-    @OneToMany(mappedBy = "orderItem", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<SupplierOrderQuotation> supplierOrderQuotations;
 
 }

@@ -1,4 +1,4 @@
-package com.csse.backend;
+package com.csse.backend.ItemServicesTest.Item;
 
 import com.csse.backend.dtos.SupplierAcceptPrDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class SupplierOrderQuotationServiceTests {
+public class ItemServiceTests {
 
     @Autowired
     private MockMvc mockMvc;
@@ -129,7 +129,7 @@ public class SupplierOrderQuotationServiceTests {
     }
 
     /*
-        Test whether an invoice cannot be updated for a no- existing supplier order quotation
+        Test whether an invoice cannot be updated for a non-existing supplier order quotation
     */
     @Test
     public void updateInvoiceReturnsHttpStatusAUnprocessableEntity() throws Exception {

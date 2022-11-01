@@ -1,9 +1,8 @@
 package com.csse.backend.services.impl;
 
-import com.csse.backend.domains.OrderItem;
-import com.csse.backend.domains.User;
+import com.csse.backend.domains.Order;
+import com.csse.backend.enums.OrderStatus;
 import com.csse.backend.repositories.OrderItemRepository;
-import com.csse.backend.repositories.UserRepository;
 import com.csse.backend.services.OrderItemService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -20,27 +19,19 @@ public class OrderItemServiceImpl implements OrderItemService {
     @Autowired
     private OrderItemRepository orderItemRepository;
 
-    @Autowired
-    private UserRepository userRepository;
-
     /**
      * Get all supervisor approved purchase requisitions
      *
-     * @param supplierId - Supplier identification
-     * @return List<OrderItem></OrderItem>
+     * @return - List of approved orders
      */
     @Override
-    public List<OrderItem> getAllCustomerApprovedPurchaseRequisitions(long supplierId) {
+    public List<Order> getAllCustomerApprovedPurchaseRequisitions() {
         try {
-            User user = userRepository.getUserById(supplierId);
-
-            if (user != null) {
-                return orderItemRepository.getAllCustomerApprovedPurchaseRequisitions(supplierId);
-            } else {
-                return null;
-            }
+            List<Order> orders = orderItemRepository.findAll();
+            orders.removeIf(order -> !order.getOrderStatus().equals(OrderStatus.APPROVED));
+            return orders;
         } catch (IllegalArgumentException e) {
-            log.error(e.getMessage());
+            log.error("{}", e.getMessage());
             return null;
         }
     }

@@ -55,9 +55,9 @@ public class User {
     private String companyName;
 
     @OneToMany(mappedBy = "createdBy", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<OrderItem> orderItems;
+    private List<Order> orders;
 
     @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<SupplierOrderQuotation> supplierOrderQuotations;
+    private List<Item> items;
 
 }

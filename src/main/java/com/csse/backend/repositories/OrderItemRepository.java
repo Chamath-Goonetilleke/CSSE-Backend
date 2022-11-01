@@ -1,13 +1,8 @@
 package com.csse.backend.repositories;
 
-import com.csse.backend.domains.OrderItem;
+import com.csse.backend.domains.Order;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
-public interface OrderItemRepository {
-
-    OrderItem getOrderItemById(Long id);
-
-    List<OrderItem> getAllCustomerApprovedPurchaseRequisitions(long supplierId);
+public interface OrderItemRepository extends JpaRepository<Order, Long> {
 
 }
