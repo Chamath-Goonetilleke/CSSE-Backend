@@ -54,7 +54,7 @@ public class SupplierOrderQuotationRepositoryImpl implements SupplierOrderQuotat
     @Override
     public List<Item> getAllCustomerAndSupplierAcceptedPurchaseRequisitions(long supplierId) {
         TypedQuery<Item> query = entityManager
-                .createQuery("SELECT s FROM Item s, Order o WHERE s.supplier.id = :supplierId AND s.itemStatus = 2", Item.class);
+                .createQuery("SELECT DISTINCT s FROM Item s, Order o WHERE s.supplier.id = :supplierId AND s.itemStatus = 2", Item.class);
         query.setParameter("supplierId", supplierId);
         return query.getResultList();
     }
