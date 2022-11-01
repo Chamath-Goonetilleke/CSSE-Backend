@@ -28,154 +28,140 @@ public class SupplierOrderQuotationController {
     @Autowired
     SupplierOrderQuotationService supplierOrderQuotationService;
 
-    /*
-        Accept purchase requisitions which are received from customer by supplier identification
+    /**
+     * Accept purchase requisitions which are received from customer by supplier identification
+     *
+     * @param supplierAcceptPrDto - Details which needs to create a supplier order quotation
+     * @return - ResponseEntity object containing the status of the requested functionality
      */
     @PostMapping("/accept-customer-approved-pr")
     public ResponseEntity acceptCustomerApprovedPurchaseRequisition(@RequestBody SupplierAcceptPrDto supplierAcceptPrDto) {
-        try {
-            boolean response = supplierOrderQuotationService.acceptCustomerApprovedPurchaseRequisition(supplierAcceptPrDto);
+        boolean response = supplierOrderQuotationService.acceptCustomerApprovedPurchaseRequisition(supplierAcceptPrDto);
 
-            if (response) {
-                return new ResponseEntity(HttpStatus.CREATED);
-            } else {
-                return new ResponseEntity(HttpStatus.CONFLICT);
-            }
-        } catch (Exception e) {
-            log.error("{}", e.getMessage());
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        if (response) {
+            return new ResponseEntity(HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity(HttpStatus.CONFLICT);
         }
     }
 
-    /*
-        Get all ready to deliver order items by supplier identification
+    /**
+     * Get all ready to deliver order items by supplier identification
+     *
+     * @param supplierId - Supplier identification
+     * @return - ResponseEntity object containing ready to deliver items
      */
     @GetMapping("/all-customer-supplier-accepted-pr/{supplierId}")
     public ResponseEntity<List<Item>> getAllCustomerAndSupplierAcceptedPurchaseRequisitions(@PathVariable Long supplierId) {
-        try {
-            List<Item> orderItems = supplierOrderQuotationService.getAllCustomerAndSupplierAcceptedPurchaseRequisitions(supplierId);
+        List<Item> orderItems = supplierOrderQuotationService.getAllCustomerAndSupplierAcceptedPurchaseRequisitions(supplierId);
 
-            if (orderItems != null) {
-                return new ResponseEntity<>(orderItems, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        } catch (Exception e) {
-            log.error("{}", e.getMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        if (orderItems != null) {
+            return new ResponseEntity<>(orderItems, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    /*
-        Upload an advice note for a ready to deliver item
+    /**
+     * Upload an advice note for a ready to deliver item
+     *
+     * @param supplierOrderQuotationId - Supplier order quotation identification
+     * @param link                     - Advice note updated link
+     * @return - ResponseEntity object containing the status of the requested functionality
      */
     @PutMapping("/update-advice-note/{supplierOrderQuotationId}/{link}")
     public ResponseEntity updateAdviceNote(@PathVariable long supplierOrderQuotationId, @PathVariable String link) {
-        try {
-            boolean response = supplierOrderQuotationService.updateAdviceNote(supplierOrderQuotationId, link);
-            if (response) {
-                return new ResponseEntity(HttpStatus.ACCEPTED);
-            } else {
-                return new ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY);
-            }
-        } catch (Exception e) {
-            log.error("{}", e.getMessage());
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        boolean response = supplierOrderQuotationService.updateAdviceNote(supplierOrderQuotationId, link);
+        if (response) {
+            return new ResponseEntity(HttpStatus.ACCEPTED);
+        } else {
+            return new ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY);
         }
     }
 
-    /*
-        Upload an invoice for a ready to deliver item
+    /**
+     * Upload an advice note for a ready to deliver item
+     *
+     * @param supplierOrderQuotationId - Supplier order quotation identification
+     * @param link                     - Invoide note updated link
+     * @return - ResponseEntity object containing the status of the requested functionality
      */
     @PutMapping("/update-invoice/{supplierOrderQuotationId}/{link}")
     public ResponseEntity updateInvoice(@PathVariable long supplierOrderQuotationId, @PathVariable String link) {
-        try {
-            boolean response = supplierOrderQuotationService.updateInvoice(supplierOrderQuotationId, link);
-            if (response) {
-                return new ResponseEntity(HttpStatus.ACCEPTED);
-            } else {
-                return new ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY);
-            }
-        } catch (Exception e) {
-            log.error("{}", e.getMessage());
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        boolean response = supplierOrderQuotationService.updateInvoice(supplierOrderQuotationId, link);
+        if (response) {
+            return new ResponseEntity(HttpStatus.ACCEPTED);
+        } else {
+            return new ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY);
         }
     }
 
-    /*
-        Get all customer accepted supplier order quotations but supplier yet be decided whether the ordered item
-        is going to deliver or not by supplier identification
+    /**
+     * Get all customer accepted supplier order quotations but supplier yet be decided whether the ordered item
+     * is going to deliver or not by supplier identification
+     *
+     * @param supplierId - Supplier identification
+     * @return - ResponseEntity object containing all customer accepted supplier order quotations
      */
     @GetMapping("/all-customer-accepted-pr/{supplierId}")
     public ResponseEntity<List<Item>> getAllCustomerAcceptedPurchaseRequisitions(@PathVariable long supplierId) {
-        try {
-            List<Item> orderItems = supplierOrderQuotationService.getAllCustomerAcceptedPurchaseRequisitions(supplierId);
+        List<Item> orderItems = supplierOrderQuotationService.getAllCustomerAcceptedPurchaseRequisitions(supplierId);
 
-            if (orderItems != null) {
-                return new ResponseEntity<>(orderItems, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        } catch (Exception e) {
-            log.error("{}", e.getMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        if (orderItems != null) {
+            return new ResponseEntity<>(orderItems, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    /*
-        Supplier accept, customer accepted supplier order quotation by supplier order quotation identification
+    /**
+     * Supplier accept, customer accepted supplier order quotation by supplier order quotation identification
+     *
+     * @param supplierOrderQuotationId - Supplier order quotation identification
+     * @return - ResponseEntity object containing the status of the requested functionality
      */
     @PutMapping("/accept-customer-accepted-pr/{supplierOrderQuotationId}")
     public ResponseEntity acceptCustomerAcceptedPurchaseRequisition(@PathVariable long supplierOrderQuotationId) {
-        try {
-            boolean response = supplierOrderQuotationService.acceptCustomerAcceptedOrderQuotation(supplierOrderQuotationId);
+        boolean response = supplierOrderQuotationService.acceptCustomerAcceptedOrderQuotation(supplierOrderQuotationId);
 
-            if (response) {
-                return new ResponseEntity(HttpStatus.ACCEPTED);
-            } else {
-                return new ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY);
-            }
-        } catch (Exception e) {
-            log.error("{}", e.getMessage());
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        if (response) {
+            return new ResponseEntity(HttpStatus.ACCEPTED);
+        } else {
+            return new ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY);
         }
     }
 
-    /*
-        Get all supplier order quotation list from employee user identification
+    /**
+     * Get all supplier order quotation list from employee user identification
+     *
+     * @param employeeUserId - Employee user identification
+     * @return ResponseEntity object containing all customer approval pending supplier order quotations list
      */
     @GetMapping("/all-customer-approval-pending-soq/{employeeUserId}")
     public ResponseEntity<List<Item>> getAllCustomerApprovalPendingSoq(@PathVariable long employeeUserId) {
-        try {
-            List<Item> orderItems = supplierOrderQuotationService.getAllCustomerApprovalPendingSoq(employeeUserId);
+        List<Item> orderItems = supplierOrderQuotationService.getAllCustomerApprovalPendingSoq(employeeUserId);
 
-            if (orderItems != null) {
-                return new ResponseEntity<>(orderItems, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        } catch (Exception e) {
-            log.error("{}", e.getMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        if (orderItems != null) {
+            return new ResponseEntity<>(orderItems, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    /*
-        Accept or reject supplier order quotation
+    /**
+     * Accept or reject supplier order quotation
+     *
+     * @param command - Information required to accept or reject a pending supplier order identification
+     * @return - ResponseEntity object containing the status of the requested functionality
      */
     @PutMapping("/accept-or-reject-approval-pending-soq")
     public ResponseEntity acceptOrRejectCustomerApprovalPendingSoq(@RequestBody AcceptOrRejectPendingPr command) {
-        try {
-            boolean response = supplierOrderQuotationService.acceptOrRejectCustomerApprovalPendingSoq(command);
+        boolean response = supplierOrderQuotationService.acceptOrRejectCustomerApprovalPendingSoq(command);
 
-            if (response) {
-                return new ResponseEntity(HttpStatus.ACCEPTED);
-            } else {
-                return new ResponseEntity(HttpStatus.NOT_FOUND);
-            }
-        } catch (Exception e) {
-            log.error("{}", e.getMessage());
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        if (response) {
+            return new ResponseEntity(HttpStatus.ACCEPTED);
+        } else {
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
     }
 

@@ -24,22 +24,16 @@ public class OrderItemController {
     /**
      * Get all approved customer approved purchase requisitions by supplier identification
      *
-     * @return ResponseEntity object containing requested data
+     * @return ResponseEntity object containing all customer approved orders list
      */
     @GetMapping("/all-customer-approved-pr")
     public ResponseEntity<List<Order>> getAllCustomerApprovedPurchaseRequisitions() {
-        try {
-            List<Order> orders = orderItemService.getAllCustomerApprovedPurchaseRequisitions();
+        List<Order> orders = orderItemService.getAllCustomerApprovedPurchaseRequisitions();
 
-            if (orders != null) {
-                return new ResponseEntity<>(orders, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        } catch (Exception e) {
-            log.error("{}", e.getMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        if (orders != null) {
+            return new ResponseEntity<>(orders, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
 }
