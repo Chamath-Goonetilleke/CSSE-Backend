@@ -1,8 +1,10 @@
 package com.csse.backend.RetrieveDeliveredItems.Entity;
 
-import com.csse.backend.domains.OrderItem;
+//import com.csse.backend.domains.OrderItem;
+import com.csse.backend.domains.Order;
 import com.csse.backend.domains.User;
-import com.csse.backend.enums.SupplierOrderQuotationStatus;
+//import com.csse.backend.enums.SupplierOrderQuotationStatus;
+import com.csse.backend.enums.ItemStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,50 +17,48 @@ import java.sql.Date;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "supplier_order_quotation")
+@Table(name = "item")
 public class DeliveredItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "SUPPLIER_ORDER_QUOTATION_ID")
+    @Column(name = "item_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "USER_ID", nullable = false)
-    @JsonIgnore
-    private User supplier;
+    @Column(name = "user_id")
+    private Long supplier;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "ORDER_ITEM_ID", nullable = false)
-    private OrderItem orderItem;
 
-    @Column(name = "SUPPLY_AMOUNT")
-    private String supplyAmount;
+    @Column(name = "order_id")
+    private Long order;
 
-    @Column(name = "SUPPLY_PRICE_PER_UNIT")
-    private Float supplyPricePerUnit;
+    @Column(name = "deliverable_amount")
+    private String deliverableAmount;
 
-    @Column(name = "SUPPLY_BRAND")
-    private String supplyBrand;
+    @Column(name = "price_per_unit")
+    private Float pricePerUnit;
 
-    @Column(name = "SUPPLY_DATE")
-    private Date supplyDate;
+    @Column(name = "deliverable_brand")
+    private String deliverableBrand;
 
-    @Column(name = "ORDER_REJECTED_DATE")
-    private Date orderRejectedDate;
+    @Column(name = "deliverable_date")
+    private Date deliverableDate;
 
-    @Column(name = "ORDER_REJECTED_REASON")
-    private String orderRejectedReason;
+    @Column(name = "rejected_date")
+    private Date rejectedDate;
 
-    @Column(name = "ADVICE_NOTE")
+    @Column(name = "rejected_reason")
+    private String rejectedReason;
+
+    @Column(name = "advice_note")
     private String adviceNote;
 
-    @Column(name = "INVOICE")
+    @Column(name = "invoice")
     private String invoice;
 
-    @Column(name = "SUPPLIER_ORDER_QUOTATION_STATUS")
+    @Column(name = "item_status")
     @Enumerated(EnumType.ORDINAL)
-    private SupplierOrderQuotationStatus supplierOrderQuotationStatus;
+    private ItemStatus itemStatus;
 
 
 }

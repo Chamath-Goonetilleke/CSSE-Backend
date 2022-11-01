@@ -2,11 +2,8 @@ package com.csse.backend.RetrieveDeliveredItems.Controller;
 
 import com.csse.backend.RetrieveDeliveredItems.DTO.DeliveredItemResponseDTO;
 import com.csse.backend.RetrieveDeliveredItems.DTO.ReportDTO;
-import com.csse.backend.RetrieveDeliveredItems.Entity.DeliveredItem;
 import com.csse.backend.RetrieveDeliveredItems.Services.Abstract.DeliveredItemsService;
 import com.csse.backend.RetrieveDeliveredItems.Services.Abstract.ReportService;
-import com.csse.backend.domains.SupplierOrderQuotation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

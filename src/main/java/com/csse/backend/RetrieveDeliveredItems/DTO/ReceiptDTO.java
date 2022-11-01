@@ -1,5 +1,6 @@
 package com.csse.backend.RetrieveDeliveredItems.DTO;
 
+import com.csse.backend.domains.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,5 +18,5 @@ public class ReceiptDTO {
     private Float totalAmount;
     private Date deliveredDate;
     private String adviceNote;
-    private String supplier;
+    private User supplier;
 }

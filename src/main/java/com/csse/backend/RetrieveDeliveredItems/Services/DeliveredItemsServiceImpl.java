@@ -5,12 +5,11 @@ import com.csse.backend.RetrieveDeliveredItems.DTO.ReceiptDTO;
 import com.csse.backend.RetrieveDeliveredItems.Entity.DeliveredItem;
 import com.csse.backend.RetrieveDeliveredItems.Respository.DeliveredItemsRepository;
 import com.csse.backend.RetrieveDeliveredItems.Services.Abstract.DeliveredItemsService;
-import com.csse.backend.domains.OrderItem;
-import com.csse.backend.domains.SupplierOrderQuotation;
+import com.csse.backend.domains.Item;
+import com.csse.backend.domains.Order;
 import com.csse.backend.domains.User;
 import com.csse.backend.repositories.OrderItemRepository;
 import com.csse.backend.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -32,29 +31,25 @@ public class DeliveredItemsServiceImpl implements DeliveredItemsService {
     public List<DeliveredItemResponseDTO> getAllOrders() {
 
         try {
-            List<DeliveredItem> deliveredItems =deliveredItemsRepository.getAllDeliveredItems();
+            List<Item> deliveredItems =deliveredItemsRepository.getAllDeliveredItems();
             List<DeliveredItemResponseDTO> responseDTOList =new ArrayList<>();
 
-            for (DeliveredItem deliveredItem: deliveredItems) {
+            for (Item deliveredItem: deliveredItems) {
 
-                OrderItem orderItem = orderItemRepository.getOrderItemById(deliveredItem.getOrderItem().getId());
+                Order orderItem = orderItemRepository.getReferenceById(deliveredItem.getOrder().getId());
 
-                float quantity = Float.parseFloat(deliveredItem.getSupplyAmount().split("\\s+")[0]);
-
-               // User supplier = userRepository.getUserById(1L);
-
-
+                float quantity = Float.parseFloat(deliveredItem.getDeliverableAmount().split("\\s+")[0]);
 
                 ReceiptDTO receiptDTO = new ReceiptDTO();
                 receiptDTO.setReferenceNumber(orderItem.getId());
-                receiptDTO.setItem(orderItem.getItemName());
-                receiptDTO.setQuantity(deliveredItem.getSupplyAmount());
-                receiptDTO.setBrand(deliveredItem.getSupplyBrand());
-                receiptDTO.setUnitPrice(deliveredItem.getSupplyPricePerUnit());
-                receiptDTO.setTotalAmount(quantity*deliveredItem.getSupplyPricePerUnit());
-                receiptDTO.setDeliveredDate(deliveredItem.getSupplyDate());
+                receiptDTO.setItem(orderItem.getOrderName());
+                receiptDTO.setQuantity(deliveredItem.getDeliverableAmount());
+                receiptDTO.setBrand(deliveredItem.getDeliverableBrand());
+                receiptDTO.setUnitPrice(deliveredItem.getPricePerUnit());
+                receiptDTO.setTotalAmount(quantity*deliveredItem.getPricePerUnit());
+                receiptDTO.setDeliveredDate(deliveredItem.getDeliverableDate());
                 receiptDTO.setAdviceNote(deliveredItem.getAdviceNote());
-                receiptDTO.setSupplier("supplier");
+
 
                 DeliveredItemResponseDTO itemResponseDTO= new DeliveredItemResponseDTO(receiptDTO);
 
@@ -68,8 +63,5 @@ public class DeliveredItemsServiceImpl implements DeliveredItemsService {
         }
     }
 
-    @Override
-    public SupplierOrderQuotation getOrderById(Long orderId) {
-        return null;
-    }
 }
+
