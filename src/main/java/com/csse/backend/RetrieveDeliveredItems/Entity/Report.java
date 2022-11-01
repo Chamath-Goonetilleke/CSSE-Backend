@@ -1,21 +1,25 @@
 package com.csse.backend.RetrieveDeliveredItems.Entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.csse.backend.RetrieveDeliveredItems.Common.CommonConstants;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "report")
-@Data
 @AllArgsConstructor
+@Entity
+@Getter
 @NoArgsConstructor
+@Setter
+@Table(name = CommonConstants.REPORT_DB_NAME)
 public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+    @Column(name = CommonConstants.REPORT_ID)
     private Long id;
+
+    @Column(name = CommonConstants.REPORT_DATE)
     private String date;
+
+    @Column(name = CommonConstants.REPORT_IMAGE)
     private String image;
 }

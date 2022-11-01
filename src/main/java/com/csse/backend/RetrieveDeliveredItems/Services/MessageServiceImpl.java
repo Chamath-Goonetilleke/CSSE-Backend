@@ -4,7 +4,6 @@ import com.csse.backend.RetrieveDeliveredItems.DTO.MessageDTO;
 import com.csse.backend.RetrieveDeliveredItems.Entity.Message;
 import com.csse.backend.RetrieveDeliveredItems.Respository.MessageRepository;
 import com.csse.backend.RetrieveDeliveredItems.Services.Abstract.MessageService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,6 +15,9 @@ public class MessageServiceImpl implements MessageService {
         this.messageRepository = messageRepository;
     }
 
+    /**
+     * Save messages
+     */
     @Override
     public boolean AddMessage(MessageDTO messageDTO) {
         try {
@@ -25,11 +27,13 @@ public class MessageServiceImpl implements MessageService {
             message.setReceiver(messageDTO.getReceiver());
             message.setOrderReference(messageDTO.getOrderReference());
 
-            messageRepository.addMessage(message);
-
+            Message message1 = messageRepository.addMessage(message);
+            if (message1.getId() == null) {
+                throw new NullPointerException();
+            }
             return true;
 
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }

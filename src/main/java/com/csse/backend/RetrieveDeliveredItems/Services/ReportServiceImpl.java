@@ -16,19 +16,26 @@ public class ReportServiceImpl implements ReportService {
         this.reportRepository = reportRepository;
     }
 
+
+    /**
+     * Save test report
+     */
     @Override
     public boolean saveReport(ReportDTO reportDTO) {
-       try {
-           Report report = new Report();
-           report.setDate(reportDTO.getDate());
-           report.setImage(reportDTO.getImage());
+        try {
+            Report report = new Report();
+            report.setDate(reportDTO.getDate());
+            report.setImage(reportDTO.getImage());
 
-           reportRepository.saveReport(report);
+            Report report1 = reportRepository.saveReport(report);
 
-           return true;
+            if (report1.getId() == null) {
+                throw new NullPointerException();
+            }
+            return true;
 
-       }catch (Exception e){
-           return false;
-       }
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

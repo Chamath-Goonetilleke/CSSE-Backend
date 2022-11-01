@@ -7,9 +7,9 @@ import com.csse.backend.RetrieveDeliveredItems.Entity.Payment;
 import com.csse.backend.RetrieveDeliveredItems.Respository.CreditCardRepository;
 import com.csse.backend.RetrieveDeliveredItems.Respository.PaymentRepository;
 import com.csse.backend.RetrieveDeliveredItems.Services.Abstract.CreditCardService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 
@@ -36,7 +36,12 @@ public class CreditCardServiceImpl implements CreditCardService {
             creditCard.setCvc(creditCardDTO.getCvc());
 
             CreditCard card = creditCardRepository.addCard(creditCard);
+
+            if (card.getId()==null){
+                throw new SQLException("Error in card creation");
+            }
             return card.getId();
+
         } catch (Exception e) {
             return 0;
         }

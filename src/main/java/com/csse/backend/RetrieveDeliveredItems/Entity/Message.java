@@ -1,34 +1,34 @@
 package com.csse.backend.RetrieveDeliveredItems.Entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.csse.backend.RetrieveDeliveredItems.Common.CommonConstants;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "message")
-@Data
 @AllArgsConstructor
+@Entity
+@Getter
 @NoArgsConstructor
+@Setter
+@Table(name = CommonConstants.MESSAGE_DB_NAME)
 public class Message {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long  id;
+    @Column(name = CommonConstants.MESSAGE_ID)
+    private Long id;
 
-    @Column(name = "message")
-    private String  message;
+    @Column(name = CommonConstants.MESSAGE_BODY)
+    private String message;
 
-    @Column(name = "sender")
-    private Long  sender;
+    @Column(name = CommonConstants.MESSAGE_SENDER)
+    private Long sender;
 
-    @Column(name = "receiver")
-    private Long  receiver;
+    @Column(name = CommonConstants.MESSAGE_RECEIVER)
+    private Long receiver;
 
-    @Column(name = "order_reference")
-    private Long  orderReference;
+    @Column(name = CommonConstants.MESSAGE_ORDER_REFERENCE)
+    private Long orderReference;
 
 
 }

@@ -23,16 +23,30 @@ public class MessageServiceImplTest {
     MessageRepository messageRepository;
 
     @Test
-    @DisplayName("")
-    void TestAddMessage(){
+    @DisplayName("AddMessageSuccess")
+    void TestAddMessageSuccess(){
+        MessageDTO message = new MessageDTO();
+        message.setMessage("Test Message");
+        message.setSender(1L);
+        message.setReceiver(2L);
+        message.setOrderReference(123L);
+        Mockito.when(messageRepository.addMessage(Mockito.any())).thenReturn(new Message(1L,"Test Message",1L,2L,123L));
+        boolean result = messageService.AddMessage(message);
+        Assertions.assertTrue(result);
+    }
+    @Test
+    @DisplayName("AddMessageFailure")
+    void TestAddMessageFailure(){
         MessageDTO message = new MessageDTO();
         message.setMessage("Test Message");
         message.setSender(1L);
         message.setReceiver(2L);
         message.setOrderReference(123L);
 
+        Mockito.when(messageRepository.addMessage(Mockito.any())).thenReturn(new Message());
+
         boolean result = messageService.AddMessage(message);
-        Assertions.assertEquals(true,result);
+        Assertions.assertFalse(result);
     }
 
 }

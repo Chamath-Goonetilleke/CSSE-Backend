@@ -1,5 +1,6 @@
 package com.csse.backend.RetrieveDeliveredItems.Controller;
 
+import com.csse.backend.RetrieveDeliveredItems.Common.CommonConstants;
 import com.csse.backend.RetrieveDeliveredItems.DTO.CreditCardDTO;
 import com.csse.backend.RetrieveDeliveredItems.DTO.PaymentDTO;
 import com.csse.backend.RetrieveDeliveredItems.Entity.CreditCard;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/payment")
+@RequestMapping(CommonConstants.CREDIT_CARD_BASE_URL)
 public class CreditCardController {
 
     final CreditCardService creditCardService;
@@ -20,42 +21,54 @@ public class CreditCardController {
         this.creditCardService = creditCardService;
     }
 
-    @PostMapping("/addCard")
-    public ResponseEntity<?> addCard(@RequestBody CreditCardDTO creditCardDTO){
+    /**
+     * Api to add a credit card for a user
+     */
+    @PostMapping(CommonConstants.ADD_CARD_URL)
+    public ResponseEntity<?> addCard(@RequestBody CreditCardDTO creditCardDTO) {
         long id = creditCardService.addCard(creditCardDTO);
-        if(id !=0){
+        if (id != 0) {
             return new ResponseEntity<>(id, HttpStatus.OK);
         }
-        return new ResponseEntity<>("Something went wrong", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(CommonConstants.SOMETHING_WENT_WRONG, HttpStatus.BAD_REQUEST);
 
     }
 
-    @GetMapping("/getAllCards/{userId}")
-    public ResponseEntity<?> getAllCards(@PathVariable Long userId){
+    /**
+     * Api to get all cards by user id
+     */
+    @GetMapping(CommonConstants.Get_ALL_USER_CARDS)
+    public ResponseEntity<?> getAllCards(@PathVariable Long userId) {
         List<CreditCard> cards = creditCardService.getAllCards(userId);
-        if(cards.isEmpty()){
-            return new ResponseEntity<>("No Cards", HttpStatus.OK);
+        if (cards.isEmpty()) {
+            return new ResponseEntity<>(CommonConstants.NO_DATA_FOUND, HttpStatus.OK);
 
         }
         return new ResponseEntity<>(cards, HttpStatus.OK);
     }
 
-    @GetMapping("/getCardById/{id}")
-    public ResponseEntity<?> getCardById(@PathVariable Long id){
+    /**
+     * Api to get a credit card by card id
+     */
+    @GetMapping(CommonConstants.GET_CARD_BY_ID)
+    public ResponseEntity<?> getCardById(@PathVariable Long id) {
         CreditCard creditCard = creditCardService.getCardById(id);
-        if(creditCard==null){
-            return new ResponseEntity<>("Can't find the card", HttpStatus.BAD_REQUEST);
+        if (creditCard == null) {
+            return new ResponseEntity<>(CommonConstants.NO_DATA_FOUND, HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(creditCard, HttpStatus.OK);
     }
 
-    @PostMapping("/savePayment")
-    public ResponseEntity<?> savePayment(@RequestBody PaymentDTO paymentDTO){
+    /**
+     * Api to save a payment user done
+     */
+    @PostMapping(CommonConstants.SAVE_PAYMENT)
+    public ResponseEntity<?> savePayment(@RequestBody PaymentDTO paymentDTO) {
         boolean status = creditCardService.savePayment(paymentDTO);
-        if(status){
-            return new ResponseEntity<>("Saved", HttpStatus.OK);
+        if (status) {
+            return new ResponseEntity<>(CommonConstants.SAVED, HttpStatus.OK);
         }
-        return new ResponseEntity<>("Something went wrong", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(CommonConstants.SOMETHING_WENT_WRONG, HttpStatus.BAD_REQUEST);
     }
 
 }

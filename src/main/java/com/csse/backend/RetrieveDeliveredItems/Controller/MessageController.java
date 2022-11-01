@@ -1,14 +1,14 @@
 package com.csse.backend.RetrieveDeliveredItems.Controller;
 
+import com.csse.backend.RetrieveDeliveredItems.Common.CommonConstants;
 import com.csse.backend.RetrieveDeliveredItems.DTO.MessageDTO;
 import com.csse.backend.RetrieveDeliveredItems.Services.Abstract.MessageService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/message")
+@RequestMapping(CommonConstants.MESSAGE_BASE_URL)
 public class MessageController {
     final MessageService messageService;
 
@@ -16,13 +16,16 @@ public class MessageController {
         this.messageService = messageService;
     }
 
-    @PostMapping("/addMessage")
-    public ResponseEntity<?> addMessage(@RequestBody MessageDTO messageDTO){
-        Boolean status = messageService.AddMessage(messageDTO);
-        if(status){
-            return new ResponseEntity<>("Saved Success", HttpStatus.OK);
+    /**
+     * API for save a message
+     */
+    @PostMapping(CommonConstants.SAVE_MESSAGE)
+    public ResponseEntity<?> addMessage(@RequestBody MessageDTO messageDTO) {
+        boolean status = messageService.AddMessage(messageDTO);
+        if (status) {
+            return new ResponseEntity<>(CommonConstants.SAVED, HttpStatus.OK);
         }
-        return new ResponseEntity<>("Something went wrong",HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(CommonConstants.SOMETHING_WENT_WRONG, HttpStatus.BAD_REQUEST);
     }
 
 }
