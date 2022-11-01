@@ -1,7 +1,6 @@
 package com.csse.backend.services.impl;
 
 import com.csse.backend.domains.Order;
-import com.csse.backend.domains.User;
 import com.csse.backend.repositories.OrderItemRepository;
 import com.csse.backend.repositories.UserRepository;
 import com.csse.backend.services.OrderItemService;
@@ -19,9 +18,6 @@ public class OrderItemServiceImpl implements OrderItemService {
 
     @Autowired
     private OrderItemRepository orderItemRepository;
-
-    @Autowired
-    private UserRepository userRepository;
 
     /**
      * Get all supervisor approved purchase requisitions

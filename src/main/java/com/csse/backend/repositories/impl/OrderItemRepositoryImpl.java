@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -45,6 +46,7 @@ public class OrderItemRepositoryImpl implements OrderItemRepository {
      * @param order - Order object needs to be updated
      */
     @Override
+    @Transactional
     public void updateOrderItem(Order order) {
         entityManager.merge(order);
     }
