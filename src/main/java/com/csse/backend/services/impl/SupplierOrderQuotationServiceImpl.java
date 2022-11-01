@@ -73,23 +73,23 @@ public class SupplierOrderQuotationServiceImpl implements SupplierOrderQuotation
         }
 
         if (supplierAcceptPrDto.getQuantity() != null) {
-            item.setSupplyAmount(supplierAcceptPrDto.getQuantity());
+            item.setDeliverableAmount(supplierAcceptPrDto.getQuantity());
         }
 
         if (supplierAcceptPrDto.getUnitPrice() != null) {
-            item.setSupplyPricePerUnit(supplierAcceptPrDto.getUnitPrice());
+            item.setPricePerUnit(supplierAcceptPrDto.getUnitPrice());
         } else {
             return false;
         }
 
         if (supplierAcceptPrDto.getBrand() != null) {
-            item.setSupplyBrand(supplierAcceptPrDto.getBrand());
+            item.setDeliverableBrand(supplierAcceptPrDto.getBrand());
         } else {
             return false;
         }
 
         if (supplierAcceptPrDto.getDateCanDeliver() != null) {
-            item.setSupplyDate(supplierAcceptPrDto.getDateCanDeliver());
+            item.setDeliverableDate(supplierAcceptPrDto.getDateCanDeliver());
         } else {
             return false;
         }
@@ -243,7 +243,7 @@ public class SupplierOrderQuotationServiceImpl implements SupplierOrderQuotation
      * Approve ar reject supplier order quotation by supervisor
      *
      * @param command - If command inside AcceptOrRejectPendingPr object is true will accept supplier order quotation,
-     *                else will it with reason
+     *                  else will it with reason
      * @return - true if update successful, else false
      */
     @Override
@@ -253,8 +253,8 @@ public class SupplierOrderQuotationServiceImpl implements SupplierOrderQuotation
             if (item.isPresent()) {
                 if (!command.isCommand()) {
                     item.get().setItemStatus(ItemStatus.DECLINED);
-                    item.get().setOrderRejectedReason(command.getRejectedReason());
-                    item.get().setOrderRejectedDate(command.getOrderRejectedDate());
+                    item.get().setRejectedReason(command.getRejectedReason());
+                    item.get().setRejectedDate(command.getOrderRejectedDate());
                 } else {
                     item.get().setItemStatus(ItemStatus.APPROVED);
                 }

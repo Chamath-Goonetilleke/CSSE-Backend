@@ -34,7 +34,7 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ORDER_ITEM_ID")
+    @Column(name = "ORDER_ID")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -46,17 +46,17 @@ public class Order {
     @JsonIgnore
     private List<Item> items;
 
-    @Column(name = "ORDER_ITEM_NAME")
-    private String orderItemName;
+    @Column(name = "ORDER_NAME")
+    private String orderName;
 
     @Column(name = "ORDER_REQUIRED_DATE")
     private Date orderRequiredDate;
 
-    @Column(name = "ORDER_REQUIRED_AMOUNT")
-    private String orderRequiredAmount;
+    @Column(name = "REQUIRED_AMOUNT")
+    private String requiredAmount;
 
-    @Column(name = "ORDER_ITEM_DELIVERY_ADDRESS")
-    private String orderItemDeliveryAddress;
+    @Column(name = "DELIVERY_ADDRESS")
+    private String deliveryAddress;
 
     @Column(name = "ORDER_STATUS")
     @Enumerated(EnumType.ORDINAL)
