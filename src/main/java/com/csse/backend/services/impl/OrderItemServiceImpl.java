@@ -31,7 +31,7 @@ public class OrderItemServiceImpl implements OrderItemService {
             orders.removeIf(order -> !order.getOrderStatus().equals(OrderStatus.APPROVED));
             return orders;
         } catch (IllegalArgumentException e) {
-            log.error(e.getMessage());
+            log.error("{}", e.getMessage());
             return null;
         }
     }

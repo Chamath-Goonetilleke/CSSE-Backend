@@ -117,9 +117,8 @@ public class SupplierOrderQuotationServiceImpl implements SupplierOrderQuotation
             List<Item> items = supplierOrderQuotationRepository.findAll();
             items.removeIf(item -> !item.getSupplier().getId().equals(supplierId) || !item.getItemStatus().equals(ItemStatus.PLACED));
             return items;
-        } catch (NullPointerException | UnsupportedOperationException ex) {
-            log.error("{}", ex.getMessage());
-            ex.printStackTrace();
+        } catch (NullPointerException | UnsupportedOperationException e) {
+            log.error("{}", e.getMessage());
             return null;
         }
     }
@@ -232,9 +231,8 @@ public class SupplierOrderQuotationServiceImpl implements SupplierOrderQuotation
             List<Item> items = supplierOrderQuotationRepository.findAll();
             items.removeIf(item -> !item.getOrder().getCreatedBy().getId().equals(employeeUserId) || !item.getItemStatus().equals(ItemStatus.PARTIALLY_APPROVED));
             return items;
-        } catch (NullPointerException | UnsupportedOperationException ex) {
-            log.error("{}", ex.getMessage());
-            ex.printStackTrace();
+        } catch (NullPointerException | UnsupportedOperationException e) {
+            log.error("{}", e.getMessage());
             return null;
         }
     }
@@ -243,7 +241,7 @@ public class SupplierOrderQuotationServiceImpl implements SupplierOrderQuotation
      * Approve ar reject supplier order quotation by supervisor
      *
      * @param command - If command inside AcceptOrRejectPendingPr object is true will accept supplier order quotation,
-     *                  else will it with reason
+     *                else will it with reason
      * @return - true if update successful, else false
      */
     @Override
