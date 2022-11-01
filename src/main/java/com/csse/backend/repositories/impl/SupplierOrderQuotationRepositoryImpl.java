@@ -1,6 +1,6 @@
 package com.csse.backend.repositories.impl;
 
-import com.csse.backend.domains.SupplierOrderQuotation;
+import com.csse.backend.domains.Item;
 import com.csse.backend.repositories.SupplierOrderQuotationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,26 +23,26 @@ public class SupplierOrderQuotationRepositoryImpl implements SupplierOrderQuotat
      * @return SupplierOrderQuotation
      */
     @Override
-    public SupplierOrderQuotation getSupplierQuotationById(long supplierOrderQuotationId) {
-        return entityManager.find(SupplierOrderQuotation.class, supplierOrderQuotationId);
+    public Item getSupplierQuotationById(long supplierOrderQuotationId) {
+        return entityManager.find(Item.class, supplierOrderQuotationId);
     }
 
     /**
      * Create a supplier order quotation
      *
-     * @param supplierOrderQuotation - New Supplier order quotation
+     * @param item - New Supplier order quotation
      * @return SupplierOrderQuotation
      */
     @Override
     @Transactional
-    public SupplierOrderQuotation saveSupplierOrderQuotation(SupplierOrderQuotation supplierOrderQuotation) {
-        if (supplierOrderQuotation.getId() == null) {
-            entityManager.persist(supplierOrderQuotation);
+    public Item saveSupplierOrderQuotation(Item item) {
+        if (item.getId() == null) {
+            entityManager.persist(item);
         } else {
-            supplierOrderQuotation = entityManager.merge(supplierOrderQuotation);
+            item = entityManager.merge(item);
         }
 
-        return supplierOrderQuotation;
+        return item;
     }
 
     /**
@@ -52,9 +52,9 @@ public class SupplierOrderQuotationRepositoryImpl implements SupplierOrderQuotat
      * @return List<SupplierOrderQuotation>
      */
     @Override
-    public List<SupplierOrderQuotation> getAllCustomerAndSupplierAcceptedPurchaseRequisitions(long supplierId) {
-        TypedQuery<SupplierOrderQuotation> query = entityManager
-                .createQuery("SELECT s FROM SupplierOrderQuotation s, OrderItem o WHERE s.supplier.id = :supplierId AND s.supplierOrderQuotationStatus = 2", SupplierOrderQuotation.class);
+    public List<Item> getAllCustomerAndSupplierAcceptedPurchaseRequisitions(long supplierId) {
+        TypedQuery<Item> query = entityManager
+                .createQuery("SELECT s FROM Item s, Order o WHERE s.supplier.id = :supplierId AND s.itemStatus = 2", Item.class);
         query.setParameter("supplierId", supplierId);
         return query.getResultList();
     }
@@ -66,9 +66,9 @@ public class SupplierOrderQuotationRepositoryImpl implements SupplierOrderQuotat
      * @return List<SupplierOrderQuotation>
      */
     @Override
-    public List<SupplierOrderQuotation> getAllCustomerAcceptedPurchaseRequisitions(long supplierId) {
-        TypedQuery<SupplierOrderQuotation> query = entityManager
-                .createQuery("SELECT s FROM SupplierOrderQuotation s WHERE s.supplier.id = :supplierId AND s.supplierOrderQuotationStatus = 1", SupplierOrderQuotation.class);
+    public List<Item> getAllCustomerAcceptedPurchaseRequisitions(long supplierId) {
+        TypedQuery<Item> query = entityManager
+                .createQuery("SELECT s FROM Item s WHERE s.supplier.id = :supplierId AND s.itemStatus = 1", Item.class);
         query.setParameter("supplierId", supplierId);
         return query.getResultList();
     }
@@ -80,9 +80,9 @@ public class SupplierOrderQuotationRepositoryImpl implements SupplierOrderQuotat
      * @return List<SupplierOrderQuotation>t
      */
     @Override
-    public List<SupplierOrderQuotation> getAllCustomerApprovalPendingSoq(long employeeUserId) {
-        TypedQuery<SupplierOrderQuotation> query = entityManager
-                .createQuery("SELECT s FROM SupplierOrderQuotation s WHERE s.orderItem.createdBy.id = :employeeUserId AND s.supplierOrderQuotationStatus = 0", SupplierOrderQuotation.class);
+    public List<Item> getAllCustomerApprovalPendingSoq(long employeeUserId) {
+        TypedQuery<Item> query = entityManager
+                .createQuery("SELECT s FROM Item s WHERE s.order.createdBy.id = :employeeUserId AND s.itemStatus = 0", Item.class);
         query.setParameter("employeeUserId", employeeUserId);
         return query.getResultList();
     }

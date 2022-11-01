@@ -1,6 +1,6 @@
 package com.csse.backend.services.impl;
 
-import com.csse.backend.domains.OrderItem;
+import com.csse.backend.domains.Order;
 import com.csse.backend.domains.User;
 import com.csse.backend.repositories.OrderItemRepository;
 import com.csse.backend.repositories.UserRepository;
@@ -26,19 +26,12 @@ public class OrderItemServiceImpl implements OrderItemService {
     /**
      * Get all supervisor approved purchase requisitions
      *
-     * @param supplierId - Supplier identification
      * @return List<OrderItem></OrderItem>
      */
     @Override
-    public List<OrderItem> getAllCustomerApprovedPurchaseRequisitions(long supplierId) {
+    public List<Order> getAllCustomerApprovedPurchaseRequisitions() {
         try {
-            User user = userRepository.getUserById(supplierId);
-
-            if (user != null) {
-                return orderItemRepository.getAllCustomerApprovedPurchaseRequisitions(supplierId);
-            } else {
-                return null;
-            }
+            return orderItemRepository.getAllCustomerApprovedPurchaseRequisitions();
         } catch (IllegalArgumentException e) {
             log.error(e.getMessage());
             return null;

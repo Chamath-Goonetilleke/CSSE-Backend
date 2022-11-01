@@ -1,6 +1,6 @@
 package com.csse.backend.domains;
 
-import com.csse.backend.enums.SupplierOrderQuotationStatus;
+import com.csse.backend.enums.ItemStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -27,7 +27,7 @@ import javax.persistence.Table;
 @Data
 @Entity
 @Table(name = "SUPPLIER_ORDER_QUOTATION")
-public class SupplierOrderQuotation {
+public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,7 +41,7 @@ public class SupplierOrderQuotation {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "ORDER_ITEM_ID", nullable = false)
-    private OrderItem orderItem;
+    private Order order;
 
     @Column(name = "SUPPLY_AMOUNT")
     private String supplyAmount;
@@ -69,6 +69,6 @@ public class SupplierOrderQuotation {
 
     @Column(name = "SUPPLIER_ORDER_QUOTATION_STATUS")
     @Enumerated(EnumType.ORDINAL)
-    private SupplierOrderQuotationStatus supplierOrderQuotationStatus;
+    private ItemStatus itemStatus;
 
 }

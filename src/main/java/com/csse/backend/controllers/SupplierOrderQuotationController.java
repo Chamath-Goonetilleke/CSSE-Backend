@@ -1,6 +1,6 @@
 package com.csse.backend.controllers;
 
-import com.csse.backend.domains.SupplierOrderQuotation;
+import com.csse.backend.domains.Item;
 import com.csse.backend.dtos.AcceptOrRejectPendingPr;
 import com.csse.backend.dtos.SupplierAcceptPrDto;
 import com.csse.backend.services.SupplierOrderQuotationService;
@@ -51,9 +51,9 @@ public class SupplierOrderQuotationController {
         Get all ready to deliver order items by supplier identification
      */
     @GetMapping("/all-customer-supplier-accepted-pr/{supplierId}")
-    public ResponseEntity<List<SupplierOrderQuotation>> getAllCustomerAndSupplierAcceptedPurchaseRequisitions(@PathVariable Long supplierId) {
+    public ResponseEntity<List<Item>> getAllCustomerAndSupplierAcceptedPurchaseRequisitions(@PathVariable Long supplierId) {
         try {
-            List<SupplierOrderQuotation> orderItems = supplierOrderQuotationService.getAllCustomerAndSupplierAcceptedPurchaseRequisitions(supplierId);
+            List<Item> orderItems = supplierOrderQuotationService.getAllCustomerAndSupplierAcceptedPurchaseRequisitions(supplierId);
 
             if (orderItems != null) {
                 return new ResponseEntity<>(orderItems, HttpStatus.OK);
@@ -107,9 +107,9 @@ public class SupplierOrderQuotationController {
         is going to deliver or not by supplier identification
      */
     @GetMapping("/all-customer-accepted-pr/{supplierId}")
-    public ResponseEntity<List<SupplierOrderQuotation>> getAllCustomerAcceptedPurchaseRequisitions(@PathVariable long supplierId) {
+    public ResponseEntity<List<Item>> getAllCustomerAcceptedPurchaseRequisitions(@PathVariable long supplierId) {
         try {
-            List<SupplierOrderQuotation> orderItems = supplierOrderQuotationService.getAllCustomerAcceptedPurchaseRequisitions(supplierId);
+            List<Item> orderItems = supplierOrderQuotationService.getAllCustomerAcceptedPurchaseRequisitions(supplierId);
 
             if (orderItems != null) {
                 return new ResponseEntity<>(orderItems, HttpStatus.OK);
@@ -145,9 +145,9 @@ public class SupplierOrderQuotationController {
         Get all supplier order quotation list from employee user identification
      */
     @GetMapping("/all-customer-approval-pending-soq/{employeeUserId}")
-    public ResponseEntity<List<SupplierOrderQuotation>> getAllCustomerApprovalPendingSoq(@PathVariable long employeeUserId) {
+    public ResponseEntity<List<Item>> getAllCustomerApprovalPendingSoq(@PathVariable long employeeUserId) {
         try {
-            List<SupplierOrderQuotation> orderItems = supplierOrderQuotationService.getAllCustomerApprovalPendingSoq(employeeUserId);
+            List<Item> orderItems = supplierOrderQuotationService.getAllCustomerApprovalPendingSoq(employeeUserId);
 
             if (orderItems != null) {
                 return new ResponseEntity<>(orderItems, HttpStatus.OK);

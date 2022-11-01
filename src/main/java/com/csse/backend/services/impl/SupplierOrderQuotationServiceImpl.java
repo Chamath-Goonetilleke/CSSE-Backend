@@ -1,11 +1,12 @@
 package com.csse.backend.services.impl;
 
-import com.csse.backend.domains.OrderItem;
-import com.csse.backend.domains.SupplierOrderQuotation;
+import com.csse.backend.domains.Order;
+import com.csse.backend.domains.Item;
 import com.csse.backend.domains.User;
 import com.csse.backend.dtos.AcceptOrRejectPendingPr;
 import com.csse.backend.dtos.SupplierAcceptPrDto;
-import com.csse.backend.enums.SupplierOrderQuotationStatus;
+import com.csse.backend.enums.ItemStatus;
+import com.csse.backend.enums.OrderStatus;
 import com.csse.backend.repositories.OrderItemRepository;
 import com.csse.backend.repositories.SupplierOrderQuotationRepository;
 import com.csse.backend.repositories.UserRepository;
@@ -30,10 +31,10 @@ public class SupplierOrderQuotationServiceImpl implements SupplierOrderQuotation
     SupplierOrderQuotationRepository supplierOrderQuotationRepository;
 
     @Autowired
-    UserRepository userRepository;
+    OrderItemRepository orderItemRepository;
 
     @Autowired
-    OrderItemRepository orderItemRepository;
+    UserRepository userRepository;
 
     /**
      * Create a supplier order quotation
@@ -44,13 +45,13 @@ public class SupplierOrderQuotationServiceImpl implements SupplierOrderQuotation
     @Override
     public boolean acceptCustomerApprovedPurchaseRequisition(SupplierAcceptPrDto supplierAcceptPrDto) {
 
-        SupplierOrderQuotation supplierOrderQuotation = new SupplierOrderQuotation();
+        Item item = new Item();
 
         if (supplierAcceptPrDto.getSupplierId() != null) {
             try {
                 User user = userRepository.getUserById(supplierAcceptPrDto.getSupplierId());
                 if (user != null) {
-                    supplierOrderQuotation.setSupplier(user);
+                    item.setSupplier(user);
                 } else {
                     return false;
                 }
@@ -62,9 +63,9 @@ public class SupplierOrderQuotationServiceImpl implements SupplierOrderQuotation
 
         if (supplierAcceptPrDto.getOrderItemId() != null) {
             try {
-                OrderItem orderItem = orderItemRepository.getOrderItemById(supplierAcceptPrDto.getOrderItemId());
-                if (orderItem != null) {
-                    supplierOrderQuotation.setOrderItem(orderItem);
+                Order order = orderItemRepository.getOrderItemById(supplierAcceptPrDto.getOrderItemId());
+                if (order != null) {
+                    item.setOrder(order);
                 } else {
                     return false;
                 }
@@ -75,31 +76,31 @@ public class SupplierOrderQuotationServiceImpl implements SupplierOrderQuotation
         }
 
         if (supplierAcceptPrDto.getQuantity() != null) {
-            supplierOrderQuotation.setSupplyAmount(supplierAcceptPrDto.getQuantity());
+            item.setSupplyAmount(supplierAcceptPrDto.getQuantity());
         }
 
         if (supplierAcceptPrDto.getUnitPrice() != null) {
-            supplierOrderQuotation.setSupplyPricePerUnit(supplierAcceptPrDto.getUnitPrice());
+            item.setSupplyPricePerUnit(supplierAcceptPrDto.getUnitPrice());
         } else {
             return false;
         }
 
         if (supplierAcceptPrDto.getBrand() != null) {
-            supplierOrderQuotation.setSupplyBrand(supplierAcceptPrDto.getBrand());
+            item.setSupplyBrand(supplierAcceptPrDto.getBrand());
         } else {
             return false;
         }
 
         if (supplierAcceptPrDto.getDateCanDeliver() != null) {
-            supplierOrderQuotation.setSupplyDate(supplierAcceptPrDto.getDateCanDeliver());
+            item.setSupplyDate(supplierAcceptPrDto.getDateCanDeliver());
         } else {
             return false;
         }
 
-        supplierOrderQuotation.setSupplierOrderQuotationStatus(SupplierOrderQuotationStatus.PARTIALLY_APPROVED);
+        item.setItemStatus(ItemStatus.PARTIALLY_APPROVED);
 
         try {
-            supplierOrderQuotationRepository.saveSupplierOrderQuotation(supplierOrderQuotation);
+            supplierOrderQuotationRepository.saveSupplierOrderQuotation(item);
             return true;
         } catch (EntityExistsException | TransactionRequiredException e) {
             log.error("{}", e.getMessage());
@@ -114,7 +115,7 @@ public class SupplierOrderQuotationServiceImpl implements SupplierOrderQuotation
      * @return List<SupplierOrderQuotation>
      */
     @Override
-    public List<SupplierOrderQuotation> getAllCustomerAndSupplierAcceptedPurchaseRequisitions(long supplierId) {
+    public List<Item> getAllCustomerAndSupplierAcceptedPurchaseRequisitions(long supplierId) {
         User user = userRepository.getUserById(supplierId);
 
         if (user != null) {
@@ -138,12 +139,12 @@ public class SupplierOrderQuotationServiceImpl implements SupplierOrderQuotation
      */
     @Override
     public boolean updateAdviceNote(long supplierOrderQuotationId, String link) {
-        SupplierOrderQuotation supplierOrderQuotation = supplierOrderQuotationRepository.getSupplierQuotationById(supplierOrderQuotationId);
+        Item item = supplierOrderQuotationRepository.getSupplierQuotationById(supplierOrderQuotationId);
 
-        if (supplierOrderQuotation != null) {
-            supplierOrderQuotation.setAdviceNote(link);
+        if (item != null) {
+            item.setAdviceNote(link);
             try {
-                supplierOrderQuotationRepository.saveSupplierOrderQuotation(supplierOrderQuotation);
+                supplierOrderQuotationRepository.saveSupplierOrderQuotation(item);
             } catch (EntityExistsException | TransactionRequiredException e) {
                 log.error("{}", e.getMessage());
                 return false;
@@ -163,12 +164,12 @@ public class SupplierOrderQuotationServiceImpl implements SupplierOrderQuotation
      */
     @Override
     public boolean updateInvoice(long supplierOrderQuotationId, String link) {
-        SupplierOrderQuotation supplierOrderQuotation = supplierOrderQuotationRepository.getSupplierQuotationById(supplierOrderQuotationId);
+        Item item = supplierOrderQuotationRepository.getSupplierQuotationById(supplierOrderQuotationId);
 
-        if (supplierOrderQuotation != null) {
-            supplierOrderQuotation.setInvoice(link);
+        if (item != null) {
+            item.setInvoice(link);
             try {
-                supplierOrderQuotationRepository.saveSupplierOrderQuotation(supplierOrderQuotation);
+                supplierOrderQuotationRepository.saveSupplierOrderQuotation(item);
             } catch (EntityExistsException | TransactionRequiredException e) {
                 log.error("{}", e.getMessage());
                 return false;
@@ -186,7 +187,7 @@ public class SupplierOrderQuotationServiceImpl implements SupplierOrderQuotation
      * @return List<SupplierOrderQuotation>
      */
     @Override
-    public List<SupplierOrderQuotation> getAllCustomerAcceptedPurchaseRequisitions(long supplierId) {
+    public List<Item> getAllCustomerAcceptedPurchaseRequisitions(long supplierId) {
         try {
             User user = userRepository.getUserById(supplierId);
 
@@ -210,11 +211,14 @@ public class SupplierOrderQuotationServiceImpl implements SupplierOrderQuotation
     @Override
     public boolean acceptCustomerAcceptedOrderQuotation(long supplierOrderQuotationId) {
         try {
-            SupplierOrderQuotation supplierOrderQuotation = supplierOrderQuotationRepository.getSupplierQuotationById(supplierOrderQuotationId);
+            Item item = supplierOrderQuotationRepository.getSupplierQuotationById(supplierOrderQuotationId);
 
-            if (supplierOrderQuotation != null) {
-                supplierOrderQuotation.setSupplierOrderQuotationStatus(SupplierOrderQuotationStatus.PLACED);
-                supplierOrderQuotationRepository.saveSupplierOrderQuotation(supplierOrderQuotation);
+            if (item != null) {
+                item.setItemStatus(ItemStatus.PLACED);
+                supplierOrderQuotationRepository.saveSupplierOrderQuotation(item);
+                Order order = orderItemRepository.getOrderItemById(item.getOrder().getId());
+                order.setOrderStatus(OrderStatus.COMPLETED);
+                orderItemRepository.updateOrderItem(order);
                 return true;
             } else {
                 return false;
@@ -232,7 +236,7 @@ public class SupplierOrderQuotationServiceImpl implements SupplierOrderQuotation
      * @return List<SupplierOrderQuotation>t
      */
     @Override
-    public List<SupplierOrderQuotation> getAllCustomerApprovalPendingSoq(long employeeUserId) {
+    public List<Item> getAllCustomerApprovalPendingSoq(long employeeUserId) {
         try {
             User user = userRepository.getUserById(employeeUserId);
 
@@ -257,17 +261,17 @@ public class SupplierOrderQuotationServiceImpl implements SupplierOrderQuotation
     @Override
     public boolean acceptOrRejectCustomerApprovalPendingSoq(AcceptOrRejectPendingPr command) {
         try {
-            SupplierOrderQuotation supplierOrderQuotation = supplierOrderQuotationRepository.getSupplierQuotationById(command.getSupplierOrderQuotationId());
+            Item item = supplierOrderQuotationRepository.getSupplierQuotationById(command.getSupplierOrderQuotationId());
 
-            if (supplierOrderQuotation != null) {
+            if (item != null) {
                 if (command.isCommand()) {
-                    supplierOrderQuotation.setSupplierOrderQuotationStatus(SupplierOrderQuotationStatus.APPROVED);
+                    item.setItemStatus(ItemStatus.APPROVED);
                 } else {
-                    supplierOrderQuotation.setSupplierOrderQuotationStatus(SupplierOrderQuotationStatus.DECLINED);
-                    supplierOrderQuotation.setOrderRejectedDate(command.getOrderRejectedDate());
-                    supplierOrderQuotation.setOrderRejectedReason(command.getRejectedReason());
+                    item.setItemStatus(ItemStatus.DECLINED);
+                    item.setOrderRejectedDate(command.getOrderRejectedDate());
+                    item.setOrderRejectedReason(command.getRejectedReason());
                 }
-                supplierOrderQuotationRepository.saveSupplierOrderQuotation(supplierOrderQuotation);
+                supplierOrderQuotationRepository.saveSupplierOrderQuotation(item);
                 return true;
             } else {
                 return false;

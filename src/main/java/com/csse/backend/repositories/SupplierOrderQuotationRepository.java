@@ -1,19 +1,19 @@
 package com.csse.backend.repositories;
 
-import com.csse.backend.domains.SupplierOrderQuotation;
+import com.csse.backend.domains.Item;
 
 import java.util.List;
 
 public interface SupplierOrderQuotationRepository {
 
-    SupplierOrderQuotation getSupplierQuotationById(long supplierOrderQuotationId);
+    Item getSupplierQuotationById(long supplierOrderQuotationId);
 
-    SupplierOrderQuotation saveSupplierOrderQuotation(SupplierOrderQuotation supplierOrderQuotation);
+    Item saveSupplierOrderQuotation(Item item);
 
-    List<SupplierOrderQuotation> getAllCustomerAndSupplierAcceptedPurchaseRequisitions(long supplierId);
+    List<Item> getAllCustomerAndSupplierAcceptedPurchaseRequisitions(long supplierId);
 
-    List<SupplierOrderQuotation> getAllCustomerAcceptedPurchaseRequisitions(long supplierId);
+    List<Item> getAllCustomerAcceptedPurchaseRequisitions(long supplierId);
 
-    List<SupplierOrderQuotation> getAllCustomerApprovalPendingSoq(long employeeUserId);
+    List<Item> getAllCustomerApprovalPendingSoq(long employeeUserId);
 
 }

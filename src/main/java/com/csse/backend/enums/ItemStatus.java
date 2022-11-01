@@ -1,6 +1,6 @@
 package com.csse.backend.enums;
 
-public enum SupplierOrderQuotationStatus {
+public enum ItemStatus {
 
     PARTIALLY_APPROVED, APPROVED, PLACED, DECLINED
 

@@ -1,6 +1,6 @@
 package com.csse.backend.repositories.impl;
 
-import com.csse.backend.domains.OrderItem;
+import com.csse.backend.domains.Order;
 import com.csse.backend.repositories.OrderItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
@@ -22,25 +22,31 @@ public class OrderItemRepositoryImpl implements OrderItemRepository {
      * @return OrderItem
      */
     @Override
-    public OrderItem getOrderItemById(Long id) {
-        return entityManager.find(OrderItem.class, id);
+    public Order getOrderItemById(Long id) {
+        return entityManager.find(Order.class, id);
     }
 
     /**
      * Get all supervisor approved order items by supplier id
      *
-     * @param supplierId - Supplier identification
      * @return List<OrderItem>
      */
     @Override
     @Query
-    public List<OrderItem> getAllCustomerApprovedPurchaseRequisitions(long supplierId) {
+    public List<Order> getAllCustomerApprovedPurchaseRequisitions() {
         javax.persistence.Query query = entityManager
-                .createNativeQuery("select i.* \n" +
-                        "from procurement_db.order_item i, procurement_db.order_suppliers s\n" +
-                        "where i.order_item_id = s.order_item_id AND i.order_status = 1 AND s.user_id = ?1", OrderItem.class);
-        query.setParameter(1, supplierId);
+                .createNativeQuery("select i.* from procurement_db.order_item i where i.order_status = 1", Order.class);
         return query.getResultList();
+    }
+
+    /**
+     * Update order item
+     *
+     * @param order - Order object needs to be updated
+     */
+    @Override
+    public void updateOrderItem(Order order) {
+        entityManager.merge(order);
     }
 
 }
