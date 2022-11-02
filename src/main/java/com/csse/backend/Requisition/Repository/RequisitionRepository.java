@@ -1,7 +1,7 @@
 package com.csse.backend.Requisition.Repository;
 
-import com.csse.backend.Requisition.Model.Order;
-import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.csse.backend.Requisition.Model.Orders;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -10,13 +10,21 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface RequisitionRepository  extends CrudRepository<Order, Integer> {
+public interface RequisitionRepository  extends CrudRepository<Orders, Integer> {
 
     @Modifying
-    @Query(value = "SELECT * FROM orders s WHERE s.site_manager_name = ?1 AND status = 'Pending';", nativeQuery = true)
-    List<Order> getPendingRequisitions(String name);
+    @Query(value = "SELECT * FROM orders o WHERE o.status = 1;", nativeQuery = true)
+    List<Orders> getPendingRequisitions();
 
     @Modifying
-    @Query(value = "SELECT * FROM orders s WHERE s.site_manager_name = ?1 AND status = 'Approved';", nativeQuery = true)
-    List<Order> getApprovedRequisitions(String name);
+    @Query(value = "SELECT * FROM orders o WHERE o.status = 0;", nativeQuery = true)
+    List<Orders> getApprovedRequisitions();
+
+    @Modifying
+    @Query(value = "SELECT item_name FROM order_item", nativeQuery = true)
+    List<String> getListsItems();
+
+    @Modifying
+    @Query(value = "SELECT u.user_first_and_last_name FROM user u WHERE u.user_type = 1", nativeQuery = true)
+    List<String> getListsSupplier();
 }

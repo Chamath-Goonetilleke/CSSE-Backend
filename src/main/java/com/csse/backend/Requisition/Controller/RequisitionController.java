@@ -1,14 +1,14 @@
 package com.csse.backend.Requisition.Controller;
 
 import com.csse.backend.Requisition.Dto.OrderDto;
-import com.csse.backend.Requisition.Model.Order;
 import com.csse.backend.Requisition.Service.RequisitionService;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/requisition")
+@RequestMapping("/api/v1/requisition")
 @CrossOrigin("*")
 public class RequisitionController {
 
@@ -20,13 +20,17 @@ public class RequisitionController {
         return requisitionService.insertNewRequisition(orderDto);
 
     }
-    @GetMapping("/get-pending-orders/{name}")
-    public ResponseEntity<?> getPendingOrders(@PathVariable String name){
-        return requisitionService.getPendingOrdersByName(name);
+    @GetMapping("/get-pending-orders")
+    public ResponseEntity<?> getPendingOrders(){
+        return requisitionService.getPendingOrdersByName();
 
     }
-    @GetMapping("/get-approved-requisitions/{name}")
-    public ResponseEntity<?> getApprovedRequisition(@PathVariable String name){
-        return requisitionService.getApprovedOrdersByName(name);
+    @GetMapping("/get-approved-requisitions")
+    public ResponseEntity<?> getApprovedRequisition(){
+        return requisitionService.getApprovedOrdersByName();
+    }
+    @GetMapping("/get-lists")
+    public ResponseEntity<?> getLists() throws JSONException, JSONException {
+        return requisitionService.getList();
     }
 }

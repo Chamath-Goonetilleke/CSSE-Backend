@@ -13,7 +13,8 @@ import java.util.Date;
 @Entity
 @Table(name = "orders")
 @EntityListeners(AuditingEntityListener.class)
-public class Order {
+public class Orders {
+
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -26,16 +27,16 @@ public class Order {
     private Date deliveryDate;
     private int quantity;
     private float price;
-    private String status;
+    private int status;
     private String notes;
     private String siteManagerName;
     private String supplierName;
     private String unitType;
 
-    public Order() {
+    public Orders() {
     }
 
-    public Order(Integer id, String deliveryAddress, String supplierId, String supplierAddress, String itemName, Date deliveryDate, int quantity, float price, String status, String notes, String siteManagerName, String supplierName, String unitType) {
+    public Orders(Integer id, String deliveryAddress, String supplierId, String supplierAddress, String itemName, Date deliveryDate, int quantity, float price, int status, String notes, String siteManagerName, String supplierName, String unitType) {
         this.id = id;
         this.deliveryAddress = deliveryAddress;
         this.supplierId = supplierId;
@@ -51,7 +52,7 @@ public class Order {
         this.unitType = unitType;
     }
 
-    public Order(String deliveryAddress, String itemName, Date deliveryDate, int quantity, String notes, String siteManagerName, String supplierName, String unitType, String status) {
+    public Orders(String deliveryAddress, String itemName, Date deliveryDate, int quantity, String notes, String siteManagerName, String supplierName, String unitType, int status) {
         this.deliveryAddress = deliveryAddress;
         this.itemName = itemName;
         this.deliveryDate = deliveryDate;
@@ -127,11 +128,11 @@ public class Order {
         this.price = price;
     }
 
-    public String isStatus() {
+    public int isStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
