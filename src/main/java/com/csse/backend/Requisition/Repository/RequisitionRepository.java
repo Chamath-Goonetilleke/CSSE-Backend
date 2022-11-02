@@ -14,11 +14,11 @@ public interface RequisitionRepository  extends CrudRepository<Orders, Integer> 
 
     @Modifying
     @Query(value = "SELECT * FROM orders o WHERE o.status = 1;", nativeQuery = true)
-    List<Orders> getPendingRequisitions();
+    List<Orders> getPendingRequisitions(); //get Pending orders
 
     @Modifying
     @Query(value = "SELECT * FROM orders o WHERE o.status = 0;", nativeQuery = true)
-    List<Orders> getApprovedRequisitions();
+    List<Orders> getApprovedRequisitions(); //get Approved orders
 
     @Modifying
     @Query(value = "SELECT item_name FROM order_item", nativeQuery = true)

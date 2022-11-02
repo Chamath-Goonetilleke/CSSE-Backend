@@ -26,9 +26,11 @@ public class RequisitionServiceImpl implements RequisitionService{
     RequisitionRepository requisitionRepository;
 
     @Override
-    public ResponseEntity<?> insertNewRequisition(OrderDto orderDto) {
+    public ResponseEntity<?> insertNewRequisition(OrderDto orderDto) { //insert New Requisition data
+
 
         try{
+//            store data into orders object
             Orders order = new Orders(
                     orderDto.getDeliveryAddress(),
                     orderDto.getItemName(),
@@ -52,9 +54,10 @@ public class RequisitionServiceImpl implements RequisitionService{
     }
 
     @Override
-    public ResponseEntity<?> getPendingOrdersByName() {
+    public ResponseEntity<?> getPendingOrdersByName() { //get Pending Orders By Name
 
         try{
+            //get Pending Requisition Orders By Name
             List<Orders> orderResult = requisitionRepository.getPendingRequisitions();
             LOGGER.info("Successfully get Requisition in Pending");
             return ResponseEntity.status(HttpStatus.OK).body(orderResult);
@@ -67,8 +70,9 @@ public class RequisitionServiceImpl implements RequisitionService{
     }
 
     @Override
-    public ResponseEntity<?> getApprovedOrdersByName() {
+    public ResponseEntity<?> getApprovedOrdersByName() { //get Approved Orders By Name
         try{
+            //get Approved Requisition Orders By Name
             List<Orders> orderResult = requisitionRepository.getApprovedRequisitions();
             LOGGER.info("Successfully get Requisition in Approved");
             return ResponseEntity.status(HttpStatus.OK).body(orderResult);
@@ -84,7 +88,7 @@ public class RequisitionServiceImpl implements RequisitionService{
 
 
         try{
-            List<String> items = requisitionRepository.getListsItems();
+            List<String> items = requisitionRepository.getListsItems(); //get Item List
             List<String> supplier = requisitionRepository.getListsSupplier();
 
             List<String> series = new ArrayList<>();

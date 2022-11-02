@@ -16,21 +16,25 @@ public class RequisitionController {
     RequisitionService requisitionService;
 
     @PostMapping("/add-new")
-    public ResponseEntity<?> insertRequisition(@RequestBody OrderDto orderDto){
+    public ResponseEntity<?> insertRequisition(@RequestBody OrderDto orderDto){ //get requisition order data
+
+        //call the insertNewRequisition service method to save body
         return requisitionService.insertNewRequisition(orderDto);
 
     }
     @GetMapping("/get-pending-orders")
-    public ResponseEntity<?> getPendingOrders(){
-        return requisitionService.getPendingOrdersByName();
+    public ResponseEntity<?> getPendingOrders(){ //get pending orders
+        return requisitionService.getPendingOrdersByName(); //return pending orders
 
     }
     @GetMapping("/get-approved-requisitions")
-    public ResponseEntity<?> getApprovedRequisition(){
-        return requisitionService.getApprovedOrdersByName();
+    public ResponseEntity<?> getApprovedRequisition(){ //get approved requisitions orders
+
+        return requisitionService.getApprovedOrdersByName(); //return approved orders
     }
+
     @GetMapping("/get-lists")
-    public ResponseEntity<?> getLists() throws JSONException, JSONException {
+    public ResponseEntity<?> getLists() throws JSONException, JSONException { //get Item List
         return requisitionService.getList();
     }
 }
