@@ -24,6 +24,9 @@ public class CreditCardServiceImpl implements CreditCardService {
         this.paymentRepository = paymentRepository;
     }
 
+    /**
+     * save credit card details
+     */
     @Override
     public long addCard(CreditCardDTO creditCardDTO) {
 
@@ -47,6 +50,9 @@ public class CreditCardServiceImpl implements CreditCardService {
         }
     }
 
+    /**
+     * Get all credit card details
+     */
     @Override
     public List<CreditCard> getAllCards(Long userId) {
         try {
@@ -56,6 +62,9 @@ public class CreditCardServiceImpl implements CreditCardService {
         }
     }
 
+    /**
+     * Get credit card details by id
+     */
     @Override
     public CreditCard getCardById(Long id) {
         try {
@@ -65,6 +74,9 @@ public class CreditCardServiceImpl implements CreditCardService {
         }
     }
 
+    /**
+     * save payment details
+     */
     @Override
     public boolean savePayment(PaymentDTO paymentDTO) {
         try {
