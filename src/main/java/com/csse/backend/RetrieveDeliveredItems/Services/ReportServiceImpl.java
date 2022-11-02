@@ -4,9 +4,11 @@ import com.csse.backend.RetrieveDeliveredItems.DTO.ReportDTO;
 import com.csse.backend.RetrieveDeliveredItems.Entity.Report;
 import com.csse.backend.RetrieveDeliveredItems.Respository.ReportRepository;
 import com.csse.backend.RetrieveDeliveredItems.Services.Abstract.ReportService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 @Component
+@Slf4j
 public class ReportServiceImpl implements ReportService {
 
     final
@@ -35,6 +37,7 @@ public class ReportServiceImpl implements ReportService {
             return true;
 
         } catch (Exception e) {
+            log.error(e.getMessage());
             return false;
         }
     }

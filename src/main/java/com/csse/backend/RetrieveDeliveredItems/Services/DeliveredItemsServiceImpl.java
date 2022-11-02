@@ -9,12 +9,14 @@ import com.csse.backend.UserAndOrderManagement.domains.Item;
 import com.csse.backend.UserAndOrderManagement.domains.Order;
 import com.csse.backend.UserAndOrderManagement.repositories.OrderItemRepository;
 import com.csse.backend.UserAndOrderManagement.repositories.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Slf4j
 public class DeliveredItemsServiceImpl implements DeliveredItemsService {
 
     final DeliveredItemsRepository deliveredItemsRepository;
@@ -67,6 +69,7 @@ public class DeliveredItemsServiceImpl implements DeliveredItemsService {
             }
             return responseDTOList;
         } catch (Exception e) {
+            log.error(e.getMessage());
             return null;
         }
     }

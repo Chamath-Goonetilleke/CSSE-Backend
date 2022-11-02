@@ -7,6 +7,7 @@ import com.csse.backend.RetrieveDeliveredItems.Entity.Payment;
 import com.csse.backend.RetrieveDeliveredItems.Respository.CreditCardRepository;
 import com.csse.backend.RetrieveDeliveredItems.Respository.PaymentRepository;
 import com.csse.backend.RetrieveDeliveredItems.Services.Abstract.CreditCardService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Component
+@Slf4j
 public class CreditCardServiceImpl implements CreditCardService {
 
     final CreditCardRepository creditCardRepository;
@@ -46,6 +48,7 @@ public class CreditCardServiceImpl implements CreditCardService {
             return card.getId();
 
         } catch (Exception e) {
+            log.error(e.getMessage());
             return 0;
         }
     }
@@ -58,6 +61,7 @@ public class CreditCardServiceImpl implements CreditCardService {
         try {
             return creditCardRepository.getAllCards(userId);
         } catch (Exception e) {
+            log.error(e.getMessage());
             return Collections.emptyList();
         }
     }
@@ -70,6 +74,7 @@ public class CreditCardServiceImpl implements CreditCardService {
         try {
             return creditCardRepository.getCardById(id);
         } catch (Exception e) {
+            log.error(e.getMessage());
             return null;
         }
     }
@@ -90,6 +95,7 @@ public class CreditCardServiceImpl implements CreditCardService {
 
             return true;
         }catch (Exception e){
+            log.error(e.getMessage());
             return false;
         }
     }

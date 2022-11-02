@@ -4,9 +4,11 @@ import com.csse.backend.RetrieveDeliveredItems.DTO.MessageDTO;
 import com.csse.backend.RetrieveDeliveredItems.Entity.Message;
 import com.csse.backend.RetrieveDeliveredItems.Respository.MessageRepository;
 import com.csse.backend.RetrieveDeliveredItems.Services.Abstract.MessageService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 @Component
+@Slf4j
 public class MessageServiceImpl implements MessageService {
 
     final MessageRepository messageRepository;
@@ -34,6 +36,7 @@ public class MessageServiceImpl implements MessageService {
             return true;
 
         } catch (Exception e) {
+            log.error(e.getMessage());
             return false;
         }
     }
