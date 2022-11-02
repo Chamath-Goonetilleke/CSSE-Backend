@@ -1,6 +1,6 @@
-package com.csse.backend.domains;
+package com.csse.backend.UserAndOrderManagement.domains;
 
-import com.csse.backend.enums.ItemStatus;
+import com.csse.backend.UserAndOrderManagement.enums.ItemStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;

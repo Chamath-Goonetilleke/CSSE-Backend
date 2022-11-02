@@ -1,9 +1,9 @@
-package com.csse.backend.services.impl;
+package com.csse.backend.UserAndOrderManagement.services.impl;
 
-import com.csse.backend.domains.Order;
-import com.csse.backend.enums.OrderStatus;
-import com.csse.backend.repositories.OrderItemRepository;
-import com.csse.backend.services.OrderItemService;
+import com.csse.backend.UserAndOrderManagement.domains.Order;
+import com.csse.backend.UserAndOrderManagement.enums.OrderStatus;
+import com.csse.backend.UserAndOrderManagement.repositories.OrderItemRepository;
+import com.csse.backend.UserAndOrderManagement.services.OrderItemService;
 
 import lombok.extern.slf4j.Slf4j;
 

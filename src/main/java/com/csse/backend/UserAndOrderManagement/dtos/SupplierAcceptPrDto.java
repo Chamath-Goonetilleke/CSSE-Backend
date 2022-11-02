@@ -1,4 +1,4 @@
-package com.csse.backend.dtos;
+package com.csse.backend.UserAndOrderManagement.dtos;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

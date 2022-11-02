@@ -1,6 +1,6 @@
 package com.csse.backend.RetrieveDeliveredItems.DTO;
 
-import com.csse.backend.domains.User;
+import com.csse.backend.UserAndOrderManagement.domains.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

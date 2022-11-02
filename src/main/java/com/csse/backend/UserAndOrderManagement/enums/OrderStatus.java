@@ -1,4 +1,4 @@
-package com.csse.backend.enums;
+package com.csse.backend.UserAndOrderManagement.enums;
 
 public enum OrderStatus {
 

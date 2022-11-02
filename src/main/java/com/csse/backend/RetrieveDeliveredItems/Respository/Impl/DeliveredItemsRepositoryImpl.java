@@ -2,7 +2,7 @@ package com.csse.backend.RetrieveDeliveredItems.Respository.Impl;
 
 import com.csse.backend.RetrieveDeliveredItems.Common.CommonConstants;
 import com.csse.backend.RetrieveDeliveredItems.Respository.DeliveredItemsRepository;
-import com.csse.backend.domains.Item;
+import com.csse.backend.UserAndOrderManagement.domains.Item;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 

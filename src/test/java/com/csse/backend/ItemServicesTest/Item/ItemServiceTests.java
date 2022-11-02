@@ -1,6 +1,6 @@
 package com.csse.backend.ItemServicesTest.Item;
 
-import com.csse.backend.dtos.SupplierAcceptPrDto;
+import com.csse.backend.UserAndOrderManagement.dtos.SupplierAcceptPrDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.sql.Date;

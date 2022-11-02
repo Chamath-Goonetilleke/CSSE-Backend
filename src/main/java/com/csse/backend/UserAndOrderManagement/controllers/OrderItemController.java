@@ -1,7 +1,7 @@
-package com.csse.backend.controllers;
+package com.csse.backend.UserAndOrderManagement.controllers;
 
-import com.csse.backend.domains.Order;
-import com.csse.backend.services.OrderItemService;
+import com.csse.backend.UserAndOrderManagement.domains.Order;
+import com.csse.backend.UserAndOrderManagement.services.OrderItemService;
 
 import java.util.List;
 
